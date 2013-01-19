@@ -1,0 +1,3 @@
+tn_dw_web_homepage:
+    pattern:  /
+    defaults: { _controller: TnDWWebBundle:Default:index }
