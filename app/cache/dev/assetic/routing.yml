@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /Volumes/Data/Documents/BP/repos/tndw-front/app/config/routing_dev.yml
