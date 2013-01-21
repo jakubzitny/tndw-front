@@ -1,3 +1,8 @@
+TNDW-FRONT REPOSITORY
+=======================
+
+The frontend of the new distrowatch is being written in the Symfony2 framework. Duh.
+
 Symfony Standard Edition
 ========================
 
