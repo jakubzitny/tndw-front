@@ -1,4 +1,5 @@
 app/logs
+app/logs/dev.log
 app/cache
 web/.DS_Store
 .DS_Store
