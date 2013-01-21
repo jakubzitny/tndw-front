@@ -1,1 +1,52 @@
-Symfony Hello World..
+{% extends "TnDWWebBundle::layout.html.twig" %}
+
+{% block title %}
+home
+{% endblock %}
+
+{% block body %}
+<div id="home-top">
+	<div id="home-top-title">
+		<h2>top rating</h2>
+	</div>
+	<div id="home-top-body">
+		<ol>
+			{% for distro in distros %}
+			<li>{{ distro }}</li>
+			{% endfor %}
+		</ol>
+
+	</div>
+</div>
+
+<div id="home-news">
+	<div id="home-news-title">
+		<h2>News</h2>
+	</div>
+	<div id="home-news-body">
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
+	</div>
+</div>
+
+<div id="home-updates">
+	<div id="home-updates-title">
+		<h2>Updates</h2>
+	</div>
+	<div id="home-updates-body">
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
+		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
+	</div>
+</div>
+
+<div id="home-stream">
+	<div id="home-stream-title">
+		<h2>live stream</h2>
+	</div>
+	<div id="home-stream-body">
+		<p>user AB add a coment:<br /> i don’t know what... <br />  to discussion XY</p>
+		<p>user CD add a coment: <br /> something different than AB to discussion XY</p>
+		<p>user EF add a coment: <br /> i agree with... <br />  to discussion XY</p>
+	</div>
+</div>
+{% endblock %}

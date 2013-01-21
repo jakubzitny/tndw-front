@@ -25,15 +25,6 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $allow = array();
         $pathinfo = rawurldecode($pathinfo);
 
-        // _welcome
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', '_welcome');
-            }
-
-            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\DefaultController::indexAction',  '_route' => '_welcome',);
-        }
-
         // _wdt
         if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]+)$#s', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController::toolbarAction',)), array('_route' => '_wdt'));
@@ -113,13 +104,63 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // tn_dw_web_homepage
+        // tndw_web_home
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'tn_dw_web_homepage');
+                return $this->redirect($pathinfo.'/', 'tndw_web_home');
             }
 
-            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tn_dw_web_homepage',);
+            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tndw_web_home',);
+        }
+
+        // tndw_web_distros
+        if (rtrim($pathinfo, '/') === '/distros') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'tndw_web_distros');
+            }
+
+            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\DistrosController::indexAction',  '_route' => 'tndw_web_distros',);
+        }
+
+        // tndw_web_distro
+        if (0 === strpos($pathinfo, '/distro') && preg_match('#^/distro/(?P<distro>[^/]+)$#s', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'TnDW\\WebBundle\\Controller\\DistroController::indexAction',)), array('_route' => 'tndw_web_distro'));
+        }
+
+        // tndw_web_distro_redirect
+        if (rtrim($pathinfo, '/') === '/distro') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'tndw_web_distro_redirect');
+            }
+
+            return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::urlRedirectAction',  'path' => '/distros/',  'permanent' => true,  '_route' => 'tndw_web_distro_redirect',);
+        }
+
+        // tndw_web_updates
+        if (rtrim($pathinfo, '/') === '/updates') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'tndw_web_updates');
+            }
+
+            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\UpdatesController::indexAction',  '_route' => 'tndw_web_updates',);
+        }
+
+        // tndw_web_news
+        if (rtrim($pathinfo, '/') === '/news') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'tndw_web_news');
+            }
+
+            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\NewsController::indexAction',  '_route' => 'tndw_web_news',);
+        }
+
+        // tndw_web_about
+        if (rtrim($pathinfo, '/') === '/about') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'tndw_web_about');
+            }
+
+            return array (  '_controller' => 'TnDW\\WebBundle\\Controller\\AboutController::indexAction',  '_route' => 'tndw_web_about',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

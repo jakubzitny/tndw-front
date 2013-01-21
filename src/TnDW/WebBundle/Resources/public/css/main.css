@@ -1,0 +1,94 @@
+html { min-height:100%; position:relative; }
+body { margin: 0; height: 100%; }
+
+/* HEADER */
+#header { font-family: "Zekton";  }
+
+#header-top { height: 50px; width: 100%; margin-top: 20px; }
+#header-top p { position: absolute; top: 20px; left: 40px; }
+
+#header-title { position: relative; float: left; height: 50px }
+#header-title h1 { font-size: 25px ; padding-left: 60px; font-weight: 100; text-transform: uppercase; color: rgb(88, 89, 91) }
+
+#header-login { float: right; position: relative; z-index: 2; padding: 10px 20px 0 0; height: 50px; }
+#header-login ul { list-style: none; list-style-type: none; }
+#header-login ul li { display: inline; }
+#header-login ul li a  { }
+#header-login ul li a { text-decoration: none; color: rgb(230, 157, 29) }
+#header-login ul li:hover a { color: rgb(88, 89, 91); 
+	-webkit-transition: color 0.3s;}
+
+#header-menu { background: rgb(88, 89, 91); padding-top: 15px; }
+#header-menu ul { list-style: none; list-style-type: none; margin: 0; padding: 0 0 5px 40px; }
+#header-menu ul li { display: inline; text-transform: uppercase; padding: 0 5px 0 5px }
+#header-menu ul li:first-child { padding: 0 5px 0 0; }
+#header-menu ul li a { text-decoration: none; color: #fff }
+#header-menu ul li:hover a { color: rgb(230, 157, 29); 
+	-webkit-transition: color 0.3s;}
+
+.selected { color: rgba(230, 157, 29, 0.5); }
+
+#header-search { float:right; margin-right: 10px; }
+#header-search input { width: 150px; margin: 0; padding: 0 10px 0 10px; outline: none; background: #f0f0f0; border: 1px solid #f0f0f0; height: 30px; 
+			-webkit-transition: width 0.2s; font-size: 11px; }
+#header-search input:focus { width: 450px; -webkit-transition: all 0.2s; /*-webkit-box-shadow: 0 5px rgba(88, 89, 91, 1);*/  }
+
+/* BODY */
+#body { margin: 50px 50px 10px 80px; height: 100%; }
+
+/* GENERAL */
+.pagetitle h2 { font-family: "Zekton"; font-size: 14px; color: rgb(230, 157, 29); }
+.text {font-family: "Myriad Pro"; font-size: 12px; }
+
+/* HOME */
+#home-top { width: 20%; float: left; height: 100%; }
+#home-top-title h2 { font-family: "Zekton"; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
+#home-top-body { font-family: "Myriad Pro"; font-size: 13px; color: #555;  }
+
+#home-news { width: 30%; float: left; height 100%;  }
+#home-news-title h2 { font-family: "Zekton"; font-size: 14px; padding: 0 0 0 0; color: rgb(88, 89, 91); }
+#home-news-body { font-family: "Myriad Pro"; font-size: 13px; color: #555; padding: 0 20px 0 0px; text-align:justify; text-justify:inter-word;  }
+
+#home-updates { width: 29%; float: left; height: 100%; border-left: 1px solid #ccc }
+#home-updates-title h2 { font-family: "Zekton"; font-size: 14px; padding: 0 0 0 10px; color: rgb(88, 89, 91); }
+#home-updates-body { font-family: "Myriad Pro"; font-size: 13px; color: #555; padding: 0 20px 0 10px; text-align:justify; text-justify:inter-word;  }
+
+#home-stream { float: left; width: 20%; height: 100%; }
+#home-stream-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
+#home-stream-body { font-family: "Myriad Pro"; font-size: 13px; color: #555; padding: 0 0 0 20px; }
+
+/* DISTROS */
+/*#distrolist { margin: 100px 0 0 0; text-align: center; font-family: "Myriad Pro"; font-size: 12px;
+	  -webkit-column-count: 4; -webkit-column-gap: 10px; -webkit-column-width: 50px; border: 1px solid #ff0 }
+#distrolist ul {list-style: none; }*/
+#distrolist { background: #f00;  }
+#distrolist div { width: 25%; float: left; height: 100% }
+#distrolist div ul { list-style: none; }
+#distrolist div ul li { font-family: "Myriad Pro"; font-size: 12px; }
+
+/* UPDATES */
+#updates p { text-align: justify; text-justify: inter-word; }
+
+/* NEWS */
+#news p { text-align: justify; text-justify: inter-word; }
+
+/* ABOUT */
+#about p { text-align: justify; text-justify: inter-word; }
+#about-contact { }
+#about-contact input[type=text], #about-contact input[type=email] { outline: none; height: 20px; }
+#about-contact textarea { height: 50px;  }
+
+/* FOOTER */
+#footer { width: 100%; background: rgb(88, 89, 91); position: fixed; bottom: 0; left:0 }
+#footer p { font-family: "Myriad Pro"; font-size: 12px; padding-left: 20px; color: #ccc }
+
+/* FONTS */
+@font-face {
+	font-family: zektonbo;
+	src: url('http://178.77.239.148/zektonbo.ttf');
+	font-weight:bold;
+}
+@font-face {
+	font-family: zektonrg;
+	src: url('http://178.77.239.148/zektonrg.ttf');
+}

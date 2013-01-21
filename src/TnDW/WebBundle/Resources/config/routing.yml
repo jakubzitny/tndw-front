@@ -1,3 +1,30 @@
-tn_dw_web_homepage:
+tndw_web_home:
     pattern:  /
     defaults: { _controller: TnDWWebBundle:Default:index }
+
+tndw_web_distros:
+    pattern:  /distros/
+    defaults: { _controller: TnDWWebBundle:Distros:index }
+
+tndw_web_distro:
+    pattern:  /distro/{distro}
+    defaults: { _controller: TnDWWebBundle:Distro:index }
+
+tndw_web_distro_redirect:
+    pattern: /distro/
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /distros/
+        permanent: true
+
+tndw_web_updates:
+    pattern:  /updates/
+    defaults: { _controller: TnDWWebBundle:Updates:index }
+
+tndw_web_news:
+    pattern:  /news/
+    defaults: { _controller: TnDWWebBundle:News:index }
+
+tndw_web_about:
+    pattern:  /about/
+    defaults: { _controller: TnDWWebBundle:About:index }

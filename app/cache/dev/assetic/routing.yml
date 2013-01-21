@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: /Library/WebServer/Documents/dw-front2/app/config/routing_dev.yml
+    resource: /Volumes/Data/Documents/BP/repos/tndw-front/app/config/routing_dev.yml

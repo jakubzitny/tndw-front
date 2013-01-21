@@ -1,4 +1,4 @@
-tn_dw_web:
+tndw_web:
     resource: "@TnDWWebBundle/Resources/config/routing.yml"
     prefix:   /
 

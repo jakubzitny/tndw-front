@@ -8,6 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TnDWWebBundle:Default:index.html.twig');
+		$topdistros = array('mint', 'ubuntu', 'debian', 'fedora', 'greenie', 'oracle', 'redhat', 'centos', 'mandriva', 'freebsd',
+			'puppy', 'damnsmall', 'openbsd', 'bodhi', 'arch', 'yellowdog', 'xubuntu');
+        return $this->render('TnDWWebBundle:Default:index.html.twig', array(
+			'distros' => $topdistros
+		));
     }
 }

@@ -1,6 +1,6 @@
-_welcome:
-    pattern:  /
-    defaults: { _controller: TnDWWebBundle:Default:index }
+tndw_web:
+    resource: "@TnDWWebBundle/Resources/config/routing.yml"
+    prefix:   /
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
