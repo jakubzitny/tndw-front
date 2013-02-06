@@ -1,3 +1,5 @@
+# Menu
+
 tndw_web_home:
     pattern:  /
     defaults: { _controller: TnDWWebBundle:Default:index }
@@ -28,3 +30,27 @@ tndw_web_news:
 tndw_web_about:
     pattern:  /about/
     defaults: { _controller: TnDWWebBundle:About:index }
+
+# Security
+
+tndw_web_register:
+    pattern:  /register
+    defaults: { _controller: TnDWWebBundle:Register:register }
+    
+tndw_web_register_success:
+    pattern:  /register/success
+    defaults: { _controller: TnDWWebBundle:Register:success }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: TnDWWebBundle:Security:login }
+    
+login_check:
+    pattern:   /login_check
+    
+logout:
+    pattern:  /logout
+
+tndw_web_facebook_login:
+    pattern:  /fblogin
+    defaults: { _controller: TnDWWebBundle:Security:fbLogin }

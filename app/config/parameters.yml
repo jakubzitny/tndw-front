@@ -1,10 +1,10 @@
 parameters:
-    database_driver:   pdo_mysql
+    database_driver:   pdo_pgsql
     database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_port:     5432
+    database_name:     tndw_web
+    database_user:     postgres
+    database_password: root
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
@@ -13,3 +13,6 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    facebookAppId:  529361697103665
+    facebookAppSecret:  6af6d1bb809129482d799e61e970e492

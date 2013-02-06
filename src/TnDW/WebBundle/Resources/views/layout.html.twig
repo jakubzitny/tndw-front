@@ -1,69 +1,75 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>{% block title %}TNDW{% endblock %}</title>
-		<link href="{{ asset('bundles/tndwweb/css/main.css') }}" rel="stylesheet" type="text/css" />
-	</head>
+<html xmlns:fb="http://www.facebook.com/2008/fbml"
+      xmlns:og="http://opengraphprotocol.org/schema/">
+    <head>
+        <title>{% block title %}TNDW{% endblock %}</title>
+        <link href="{{ asset('bundles/tndwweb/css/main.css') }}" rel="stylesheet" type="text/css" />
+    </head>
 
-	<body>
-		<div id="container">
-			<!-- HEADER -->
-			<div id="header">
-				{% block header %}
-				<div id="header-top">
-					<!--<p>The new<p>-->
-					<div id="header-title">
-						<h1>Distrowatch</h1>
-					</div>
-					<div id="header-login">
-						<ul>
-							<li><a href="#">Log in</a></li>
-						</ul>
-					</div>
-				</div>
-				<div id="header-menu">
-					<ul>
-						<li class="home"><a href="{{ path('tndw_web_home') }}">Home</a></li>
-						<li><a href="{{ path('tndw_web_distros') }}">Distros</a></li>
-						<li><a href="{{ path('tndw_web_updates') }}">Updates</a></li>
-						<li><a href="{{ path('tndw_web_news') }}">News</a></li>
-						<li><a href="{{ path('tndw_web_about') }}">About</a></li>
-					</ul>
-				</div>
-				<div id="header-search">
-					<form method="get" action="#">
-						<input type="text" placeholder="search whatever you want" />
-					</form>
-				</div>
-				{% endblock %}
-			</div>
-			</div>
-			<!-- BODY -->
-			<div id="body">
-				{% block body %}
-				{% endblock %}
-			</div>
-			<!-- FOOTER -->
-			<div id="footer">
-				<!--
+    <body>
+        <div id="container">
+            <!-- HEADER -->
+            <div id="header">
+            	{% block header %}
+                <div id="header-top">
+                    <!--<p>The new<p>-->
+                    <div id="header-title">
+                        <h1>Distrowatch</h1>
+                    </div>
+                    <div id="header-login">
+                        <ul>
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            	            <li><a href="{{ path('logout') }}">Logout</a></li>
+                            {% else %}
+                            <li><a href="{{ path('login') }}">Login</a></li>
+                            <li><a href="{{ path('tndw_web_register') }}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div id="header-menu">
+                    <ul>
+                        <li class="home"><a href="{{ path('tndw_web_home') }}">Home</a></li>
+                        <li><a href="{{ path('tndw_web_distros') }}">Distros</a></li>
+                        <li><a href="{{ path('tndw_web_updates') }}">Updates</a></li>
+                        <li><a href="{{ path('tndw_web_news') }}">News</a></li>
+                        <li><a href="{{ path('tndw_web_about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div id="header-search">
+                   	<form method="get" action="#">
+                        <input type="text" placeholder="search whatever you want" />
+                     </form>
+                </div>
+                {% endblock %}
+            </div>
+            <!-- BODY -->
+            <div id="body">
+            	{% block body %}
+                {% endblock %}
+                {% block fos_user_content %}
+                {% endblock fos_user_content %}
+             </div>
+             <!-- FOOTER -->
+             <div id="footer">
+                <!--
 				{% block footer %}
-					<p>DISTROWATCH is the best source of information about Linux distributions and other operating systems.</p>
-					<p align="right">HOME | DISTROS | UPDATES | NEWS | ABOUT </p>
-				{% endblock %}
-				-->
-			</div>
+                <p>DISTROWATCH is the best source of information about Linux distributions and other operating systems.</p>
+                <p align="right">HOME | DISTROS | UPDATES | NEWS | ABOUT </p>
+                {% endblock %}
+                 -->
+             </div>
 		</div>
-
-		<!-- SCRIPTS -->
-		<script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-    			$(".home a").addClass('selected');
-    			$("#header-menu ul li a").click(function() {
-        			$("#header-menu ul li a").removeClass('selected');
-        			$(this).addClass('selected');
-    			});
-			});
-		</script>
+        <!-- SCRIPTS -->
+        <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".home a").addClass('selected');
+                $("#header-menu ul li a").click(function() {
+                	$("#header-menu ul li a").removeClass('selected');
+                	$(this).addClass('selected');
+                });
+            });
+        </script>
 	</body>
 </html>

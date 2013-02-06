@@ -1,0 +1,4 @@
+TnDW\WebBundle\Entity\User:
+      getters:
+        passwordLegal:
+            - "True": { message: "The password cannot match your first name" }
