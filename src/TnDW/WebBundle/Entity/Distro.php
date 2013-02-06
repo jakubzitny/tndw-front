@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="distros")
  */
 class Distro {
-    
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -46,8 +46,8 @@ class Distro {
      * @ORM\Column(type="text")
      */
     protected $description;
-    
-    /** 
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $status;
@@ -57,8 +57,7 @@ class Distro {
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -68,10 +67,9 @@ class Distro {
      * @param string $name
      * @return Distro
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -80,8 +78,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -91,10 +88,9 @@ class Distro {
      * @param string $os
      * @return Distro
      */
-    public function setOs($os)
-    {
+    public function setOs($os) {
         $this->os = $os;
-    
+
         return $this;
     }
 
@@ -103,8 +99,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getOs()
-    {
+    public function getOs() {
         return $this->os;
     }
 
@@ -114,10 +109,9 @@ class Distro {
      * @param string $homepage
      * @return Distro
      */
-    public function setHomepage($homepage)
-    {
+    public function setHomepage($homepage) {
         $this->homepage = $homepage;
-    
+
         return $this;
     }
 
@@ -126,8 +120,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getHomepage()
-    {
+    public function getHomepage() {
         return $this->homepage;
     }
 
@@ -137,10 +130,9 @@ class Distro {
      * @param string $wikipage
      * @return Distro
      */
-    public function setWikipage($wikipage)
-    {
+    public function setWikipage($wikipage) {
         $this->wikipage = $wikipage;
-    
+
         return $this;
     }
 
@@ -149,8 +141,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getWikipage()
-    {
+    public function getWikipage() {
         return $this->wikipage;
     }
 
@@ -160,10 +151,9 @@ class Distro {
      * @param string $screenshots
      * @return Distro
      */
-    public function setScreenshots($screenshots)
-    {
+    public function setScreenshots($screenshots) {
         $this->screenshots = $screenshots;
-    
+
         return $this;
     }
 
@@ -172,8 +162,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getScreenshots()
-    {
+    public function getScreenshots() {
         return $this->screenshots;
     }
 
@@ -183,10 +172,9 @@ class Distro {
      * @param string $description
      * @return Distro
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -195,8 +183,7 @@ class Distro {
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -206,10 +193,9 @@ class Distro {
      * @param string $status
      * @return Distro
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
-    
+
         return $this;
     }
 
@@ -218,8 +204,8 @@ class Distro {
      *
      * @return string 
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
+
 }
