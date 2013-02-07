@@ -20,13 +20,14 @@ body { margin: 0; height: 100%; }
 
 #header-menu { background: rgb(88, 89, 91); padding-top: 15px; }
 #header-menu ul { list-style: none; list-style-type: none; margin: 0; padding: 0 0 5px 40px; }
-#header-menu ul li { display: inline; text-transform: uppercase; padding: 0 5px 0 5px }
+#header-menu ul li { display: inline; text-transform: uppercase; padding: 0 5px 0 5px; }
 #header-menu ul li:first-child { padding: 0 5px 0 0; }
-#header-menu ul li a { text-decoration: none; color: #fff }
+#header-menu ul li a { text-decoration: none; /* selecting link carefuly */ }
 #header-menu ul li:hover a { color: rgb(230, 157, 29); 
                              -webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s }
 
-.selected { color: rgba(230, 157, 29, 0.5); }
+.unselected { color: #fff; }
+.selected a { color: rgb(230, 157, 29); }
 
 #header-search { float:right; margin-right: 10px; }
 #header-search input { font-family: myriadpro; width: 150px; margin: 0; padding: 0 10px 0 10px; outline: none; background: #f0f0f0; border: 1px solid #f0f0f0; height: 30px; font-size: 12px; 

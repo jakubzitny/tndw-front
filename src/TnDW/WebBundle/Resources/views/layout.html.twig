@@ -30,10 +30,10 @@
                 <div id="header-menu">
                     <ul>
                         <li class="home"><a href="{{ path('tndw_web_home') }}">Home</a></li>
-                        <li><a href="{{ path('tndw_web_distros') }}">Distros</a></li>
-                        <li><a href="{{ path('tndw_web_updates') }}">Updates</a></li>
-                        <li><a href="{{ path('tndw_web_news') }}">News</a></li>
-                        <li><a href="{{ path('tndw_web_about') }}">About</a></li>
+                        <li class="distros"><a href="{{ path('tndw_web_distros') }}">Distros</a></li>
+                        <li class="updates"><a href="{{ path('tndw_web_updates') }}">Updates</a></li>
+                        <li class="news"><a href="{{ path('tndw_web_news') }}">News</a></li>
+                        <li class="about"><a href="{{ path('tndw_web_about') }}">About</a></li>
                     </ul>
                 </div>
                 <div id="header-search">
@@ -47,8 +47,6 @@
             <div id="body">
             	{% block body %}
                 {% endblock %}
-                {% block fos_user_content %}
-                {% endblock fos_user_content %}
              </div>
              <!-- FOOTER -->
              <div id="footer">
@@ -64,11 +62,10 @@
         <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $(".home a").addClass('selected');
-                $("#header-menu ul li a").click(function() {
-                	$("#header-menu ul li a").removeClass('selected');
-                	$(this).addClass('selected');
-                });
+                $("#header-menu ul li a").addClass('unselected');
+                var chosen = $("."+"{% block selected%}{% endblock %}");
+                chosen.removeClass('unselected');
+                chosen.addClass('selected');
             });
         </script>
 	</body>
