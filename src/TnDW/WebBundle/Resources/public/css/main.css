@@ -47,8 +47,13 @@ body { margin: 0; height: 100%; }
 #home-top { width: 20%; float: left; height: 100%; }
 #home-top-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
 #home-top-body { font-family: myriadpro; font-size: 13px; color: #555;  }
+#home-top-body ol li { font-family: myriadpro; font-size: 12px; }
+#home-top-body ol li a:link, #home-top-body ol li a:visited { font-family: myriadpro; 
+       font-size: 12px; text-decoration: none; color: rgb(88, 89, 91)}
+#home-top-body ol li a:hover { font-family: myriadpro; font-size: 12px; text-decoration: none; color: rgb(230, 157, 29)}
 
-#home-news { width: 30%; float: left; height 100%;  }
+
+#home-news { width: 30%; float: left; height: 100%; }
 #home-news-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 0; color: rgb(88, 89, 91); }
 #home-news-body { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 0px; text-align:justify; text-justify:inter-word;  }
 
@@ -60,14 +65,22 @@ body { margin: 0; height: 100%; }
 #home-stream-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
 #home-stream-body { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 0 0 20px; }
 
+.perex a, .perex a:link, .perex a:visited { text-decoration: none; color: rgba(88, 89, 91, 0.5) }
+.perex a:hover { text-decoration: none; color: rgb(230, 157, 29); }
+
 /* DISTROS */
-/*#distrolist { margin: 100px 0 0 0; text-align: center; font-family: "Myriad Pro"; font-size: 12px;
-          -webkit-column-count: 4; -webkit-column-gap: 10px; -webkit-column-width: 50px; border: 1px solid #ff0 }
-#distrolist ul {list-style: none; }*/
-#distrolist { background: #f00; }
-#distrolist div { width: 25%; float: left; height: 100%; }
-#distrolist div ul { list-style: none; }
-#distrolist div ul li { font-family: myriadpro; font-size: 12px; }
+#distro_select { font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
+#distro_select ul { list-style: none; list-style-type: none; }
+#distro_select ul li { display: inline; padding: 0 10px 0 10px; cursor: pointer }
+#distro_select ul li:hover { color: rgb(88, 89, 91); -webkit-transition: all 0.3s; }
+
+#distrolist { margin: 10px 0 0 0; text-align: left; font-family: "Myriad Pro"; font-size: 12px;
+          -webkit-column-count: 5; -webkit-column-gap: 10px; -webkit-column-width: 30px; }
+#distrolist div ol { }
+#distrolist div ol li { font-family: myriadpro; font-size: 12px; color: rgb(88, 89, 91) }
+#distrolist div ol li a:link, #distrolist div ol li a:visited { font-family: myriadpro; 
+       font-size: 12px; text-decoration: none; color: rgb(88, 89, 91) }
+#distrolist div ol li a:hover { font-family: myriadpro; font-size: 12px; text-decoration: none; color: rgb(230, 157, 29)}
 
 /* UPDATES */
 #updates p { text-align: justify; text-justify: inter-word; }

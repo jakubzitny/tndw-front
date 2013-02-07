@@ -12,7 +12,7 @@ home
 	<div id="home-top-body">
 		<ol>
 			{% for distro in distros %}
-			<li>{{ distro }}</li>
+			<li><a href="{{ path('tndw_web_distro', {'distro': distro.shortname }) }}">{{ distro.name }}</a></li>
 			{% endfor %}
 		</ol>
 
@@ -24,8 +24,9 @@ home
 		<h2>News</h2>
 	</div>
 	<div id="home-news-body">
-		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
-		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
+        {% for article in news %}
+            <p class="perex"><b>{{article.title}}</b> {{article.text}} <a class="source" href="{{article.source}}">{{article.source}}</a></p>
+        {% endfor %}
 	</div>
 </div>
 
@@ -34,9 +35,10 @@ home
 		<h2>Updates</h2>
 	</div>
 	<div id="home-updates-body">
-		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
-		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque quam id orci porttitor blandit et eu elit. In sodales lorem ac justo ultricies condimentum. Nullam feugiat pulvinar convallis. Mauris ac nulla est. Vivamus nisl sem, semper ac bibendum eget, vehicula tempor velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent a urna at sem facilisis malesuada a ut felis. Phasellus nec nibh vel augue eleifend rutrum sit amet at elit. Duis et odio odio.  </p>
-	</div>
+        {% for update in updates %}
+            <p class="perex"><b>{{update.title}}</b> {{update.text}} <a href="{{update.source}}">{{update.source}}</a></p>
+        {% endfor %}
+    </div>
 </div>
 
 <div id="home-stream">

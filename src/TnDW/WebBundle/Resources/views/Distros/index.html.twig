@@ -1,34 +1,24 @@
+{# Distros page template #}
 {% extends "TnDWWebBundle::layout.html.twig" %}
 
 {% block body %}
-<div id="distrolist">
-	<div>
-		<ul>
-			{% for i in 1..25 %}
-			<li>{{i}}. &nbsp;Mint</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<ul>
-			{% for i in 1..25 %}
-			<li>{{i}}. &nbsp;Mint</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<ul>
-			{% for i in 1..25 %}
-			<li>{{i}}. &nbsp;Mint</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div>
-		<ul>
-			{% for i in 1..25 %}
-			<li>{{i}}. &nbsp;Mint</li>
-			{% endfor %}
-		</ul>
-	</div>
+<div id="distro_select">
+    <ul>
+        <li>top 100</li>
+    </ul>
 </div>
+<div id="distrolist">
+    <div>
+        <ol>
+            {% for distro in distros %}
+            <li><a href="{{ path('tndw_web_distro', {'distro': distro.shortname}) }}">{{distro.name}}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+<script type="text/javascript">
+    function sortDistros() {
+        
+    }
+</script>
 {% endblock %}

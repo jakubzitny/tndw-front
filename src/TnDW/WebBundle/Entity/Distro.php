@@ -21,6 +21,11 @@ class Distro {
      * @ORM\Column(type="string", length=100)
      */
     protected $name;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $shortname;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -208,4 +213,27 @@ class Distro {
         return $this->status;
     }
 
+
+    /**
+     * Set shortname
+     *
+     * @param string $shortname
+     * @return Distro
+     */
+    public function setShortname($shortname)
+    {
+        $this->shortname = $shortname;
+    
+        return $this;
+    }
+
+    /**
+     * Get shortname
+     *
+     * @return string 
+     */
+    public function getShortname()
+    {
+        return $this->shortname;
+    }
 }

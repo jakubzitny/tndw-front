@@ -10,7 +10,7 @@ tndw_web_distros:
 
 tndw_web_distro:
     pattern:  /distro/{distro}
-    defaults: { _controller: TnDWWebBundle:Distro:index }
+    defaults: { _controller: TnDWWebBundle:Distros:distro }
 
 tndw_web_distro_redirect:
     pattern: /distro/
