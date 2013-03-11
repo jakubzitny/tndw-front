@@ -12,6 +12,18 @@ tndw_web_distro:
     pattern:  /distro/{distro}
     defaults: { _controller: TnDWWebBundle:Distros:distro }
 
+tndw_web_distro_deploy:
+    pattern:  /distro/{distro}/deploy
+    defaults: { _controller: TnDWWebBundle:Distros:deploy }
+    requirements:
+        _method:  POST
+
+tndw_web_distro_isdeployed:
+    pattern:  /distro/{distro}/isDeployed
+    defaults: { _controller: TnDWWebBundle:Distros:isDeployed }
+    requirements:
+        _method:  POST
+
 tndw_web_distro_redirect:
     pattern: /distro/
     defaults:

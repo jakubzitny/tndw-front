@@ -3,6 +3,8 @@
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = require __DIR__.'/../vendor/autoload.php';
+$loader->add('Predis', __DIR__.'/../vendor/predis/predis/lib/Predis' );
+
 
 // intl
 if (!function_exists('intl_get_error_code')) {

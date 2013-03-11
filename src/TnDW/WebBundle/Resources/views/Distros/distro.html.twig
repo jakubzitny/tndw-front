@@ -13,4 +13,93 @@
 {{distro.status}}
 </p>
 </div>
+<div id="links">
+	<div id="deployBtn">
+		<span style="background-color: #f90; cursor: pointer">Deploy</span>
+		<br />
+		<span id="result"></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	/*var resel = $("#deployBtn #result");
+	$("#deployBtn").click(function() {
+		var cid;
+		resel.text("waiting for server..");
+		$.post(document.URL + '/deploy',{
+			},function(data){
+					console.log(data);
+					resel.text('.. ' + data.distro + ' has been orderd to be deployed. ');
+					cid = data.cid;
+			});
+		
+	});*/
+	/* now wait for the result 
+	$("#deployBtn").click(function() {
+		function checkData2() {
+			if(xhr2.readyState == 4)  {
+				$("#deployBtn #result").text('done.');
+				console.log('twicen');
+			    console.log(xhr2.responseText);
+			}
+		}
+		function checkData() {
+			if(xhr.readyState == 4)  {
+				$("#deployBtn #result").text('ordered.. ');
+			    console.log(xhr.responseText);
+				xhr2 = new XMLHttpRequest();
+				xhr2.open("POST", document.URL + '/isDeployed', true);
+				xhr2.onreadystatechange = checkData2;
+				xhr2.send(null);
+			}
+		}
+
+		xhr = new XMLHttpRequest();
+		xhr.open("POST", document.URL + '/deploy', true);
+		xhr.onreadystatechange = checkData;
+		xhr.send(null);
+	}); */
+
+	function waitForMsg(){
+        /* This requests the url "msgsrv.php"
+        When it complete (or errors)*/
+        $.ajax({
+            type: "POST",
+            url: document.URL + "/isDeployed",
+
+            async: true, /* If set to non-async, browser shows page as "Loading.."*/
+            cache: false,
+            timeout:50000, /* Timeout in ms */
+
+            success: function(data){ /* called when request to barge.php completes */
+				$("#deployBtn #result").text('loading...');
+				console.log('...');
+				console.log(data);
+				if(data.status != "qwe"){
+                	setTimeout(
+                	    waitForMsg, /* Request next message */
+                	    1000 /* ..after 1 seconds */
+                	);
+				} else {
+					$("#deployBtn #result").text('done');
+				}
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+				console.log('err');
+                setTimeout(
+                    waitForMsg, /* Try again after.. */
+                    15000); /* milliseconds (15seconds) */
+            }
+        });
+    };
+	
+	$("#deployBtn").click(function() {
+		waitForMsg();
+	});
+
+});
+</script>
+
+
 {% endblock %}

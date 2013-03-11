@@ -4,6 +4,7 @@
     <head>
         <title>{% block title %}TNDW{% endblock %}</title>
         <link href="{{ asset('bundles/tndwweb/css/main.css') }}" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
     </head>
 
     <body>
@@ -59,7 +60,6 @@
              </div>
 		</div>
         <!-- SCRIPTS -->
-        <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#header-menu ul li a").addClass('unselected');

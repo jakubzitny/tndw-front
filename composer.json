@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.1.*",
+        "symfony/process": "2.1.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.1.*",
         "twig/extensions": "1.0.*@dev",
@@ -20,7 +21,10 @@
         "jms/di-extra-bundle": "1.1.*",
         "kriswallsmith/assetic": "1.1.*@dev",
 		"friendsofsymfony/user-bundle": "*",
-		"friendsofsymfony/facebook-bundle": "1.1.*"
+		"friendsofsymfony/facebook-bundle": "1.1.*",
+        "snc/redis-bundle": "2.1.*",
+        "predis/predis": "0.8.*",
+		"cboden/Ratchet": "0.2.*"
     },
     "scripts": {
         "post-install-cmd": [
