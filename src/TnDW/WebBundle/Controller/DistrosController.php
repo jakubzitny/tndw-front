@@ -10,31 +10,144 @@ use Predis;
 class DistrosController extends Controller {
 
     public function indexAction() {
-
-        $distros = $this->getDoctrine()->getRepository('TnDWWebBundle:Distro')->findAll();
-        if (!$distros) {
-            throw $this->createNotFoundException('No distro found..');
-        }
+		$ph = pg_Connect("dbname=troller6 user=postgres password=root");
+	  	$result = pg_query($ph, "select * from backing_distribution");
+		$distros = array();	
+		while($distro = pg_fetch_object($result))
+			$distros[] = $distro;
+		pg_free_result($result);
+		pg_close($ph);
 
         return $this->render('TnDWWebBundle:Distros:index.html.twig', array(
-                    'distros' => $distros
-                ));
+        	'distros' => $distros
+        ));
     }
     
     public function distroAction($distro){
         
-        $distrodata = $this->getDoctrine()->getRepository('TnDWWebBundle:Distro')->findOneBy(array('shortname' => $distro));
-        if (!$distrodata) {
-            $distrodata = $this->getDoctrine()->getRepository('TnDWWebBundle:Distro')->findOneBy(array('name' => $distro));
-            if (!$distrodata){
-                throw $this->createNotFoundException('No distro found..');
-            }
+		# Fetch troller distro data
+		$ph = pg_Connect("dbname=troller user=postgres password=root");
+	  	$result = pg_query($ph, "select * from backing_distribution where shortname ilike '" . $distro . "'");
+		#todo check for found
+    	$distrodata = pg_fetch_object($result);
+		# os_type
+		$distrodata->os_type = pg_fetch_object(pg_query($ph, "select * from backing_ostype where id = " . $distrodata->os_type_id))->name;
+
+		$tofetch = array("homepage", "mailing_lists", "user_forums", "documentations", "screenshots", "download_mirrors", "bug_trackers", "related_websites", "reviews");
+		foreach ($tofetch as $param) {
+			if (!isset($distrodata->$param) or 
+				$distrodata->$param == "[]" or
+				$distrodata->$param == "\"\"") continue;
+			$links = pg_query($ph, "select * from backing_link where id in (" . substr($distrodata->$param, 1, -1) . ")");
+			$distrodata->links[$param] = array();
+			while($link = pg_fetch_object($links)){
+				$distrodata->links[$param][] = $link;
+			}
+			pg_free_result($links);
+		}
+
+		# based ons
+	  	$result = pg_query($ph, "select backing_basedondistro.name, backing_basedondistro.shortname, distribution_id from (" .
+								"	backing_distribution_based_ons join backing_basedondistro " .
+								"	on backing_distribution_based_ons.basedondistro_id = backing_basedondistro.id" .
+								") join backing_distribution " .
+									"on backing_distribution.shortname = backing_basedondistro.shortname " .
+								"where backing_distribution_based_ons.distribution_id = " . $distrodata->id);
+		$distrodata->basedons = array();
+		while ($basedon = pg_fetch_object($result)){
+			$distrodata->basedons[] = $basedon;
+		}
+
+		# inspireds
+	  	$result = pg_query($ph, "select name, shortname, id from backing_distribution where id in (" .
+								"select distinct(distribution_id) from backing_distribution_based_ons where basedondistro_id = (" .
+								"	select id from backing_basedondistro where shortname = '" . $distrodata->shortname . "'))");
+		$distrodata->inspireds = array();
+		while ($inspired = pg_fetch_object($result)){
+			$distrodata->inspireds[] = $inspired;
+		}
+
+		# screenshots
+	  	$result = pg_query($ph, "select * from screenshots_fetch_sdscreenshot " .
+								"where distro_id = " . $distrodata->sdscreenshot_id);
+		$distrodata->screenshots = array();
+		while ($shot = pg_fetch_object($result)){
+			$distrodata->screenshots[] = $shot;
+		}
+		$distrodata->screenshot_default = $distrodata->screenshots[intval(count($distrodata->screenshots)/2)];
+
+
+		# architectures
+	  	$result = pg_query($ph, "select * from backing_distribution_architectures" .
+								" join backing_architecture " .
+								"on backing_distribution_architectures.architecture_id = backing_architecture.id " .
+								"where distribution_id = " . $distrodata->id);
+		$distrodata->architectures = array();
+		while ($architecture = pg_fetch_object($result)){
+			$distrodata->architectures[] = $architecture;
+		}
+
+		# desktops
+	  	$result = pg_query($ph, "select * from backing_distribution_desktops" .
+								" join backing_desktop " .
+								"on backing_distribution_desktops.desktop_id = backing_desktop.id " .
+								"where distribution_id = " . $distrodata->id);
+		$distrodata->desktops = array();
+		while ($desktop = pg_fetch_object($result)){
+			$distrodata->desktops[] = $desktop;
+		}
+
+		# categories
+	  	$result = pg_query($ph, "select * from backing_distribution_categories" .
+								" join backing_category " .
+								"on backing_distribution_categories.category_id = backing_category.id " .
+								"where distribution_id = " . $distrodata->id);
+		$distrodata->categories = array();
+		while ($category = pg_fetch_object($result)){
+			$distrodata->categories[] = $category;
+		}
+		pg_close($ph);
+
+		# countryurl
+		$countryurl = $this->getCountryOutline($distrodata->origin);
+
+		# news and updates
+        $news = $this->getDoctrine()->getRepository('TnDWWebBundle:Article')->findByType("article");
+        if (!$news) {
+            throw $this->createNotFoundException('No updates were found..');
         }
-        
+
+        $updates = $this->getDoctrine()->getRepository('TnDWWebBundle:Article')->findByType("update");
+        if (!$updates) {
+            throw $this->createNotFoundException('No updates were found..');
+        }
+
+        $topupdates = array_slice($updates, 0, 2);
+        $topnews = array_slice($news, 0, 2);
+
         return $this->render('TnDWWebBundle:Distros:distro.html.twig', array(
-                    'distro' => $distrodata,
-                ));
+        	'distrodata' => $distrodata,
+			'countryurl' => $countryurl,
+            'news' => $topnews,
+            'updates' => $topupdates,
+        ));
     }
+
+	private function getCountryOutline($origin){
+		if (preg_match('/,/', $origin)) return "";
+		else if (preg_match('/Isle\ of\ Man/i', $origin)) return "";
+		else if (preg_match('/usa/i', $origin)) return "http://0.tqn.com/d/geography/1/0/9/H/usa3.jpg";
+		$country = strtolower($origin);
+		$ch = curl_init("http://geography.about.com/library/blank/blx" . $country . ".htm");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		$source = curl_exec($ch);
+		$retval = preg_match('/http:\/\/0\.tqn\.com\/d\/geography.*jpg/', $source, $result);
+		curl_close($ch);
+		if ($retval	== FALSE)
+			return "";
+		return substr($result[0], 0, strpos($result[0], '"'));
+	}
 
 	public function isDeployedAction(/*$cid*/){
 		$cid = 123;
@@ -47,7 +160,7 @@ class DistrosController extends Controller {
 		$output = $redis->get("asd");
 		# parse response if output is not nil
 		$response_data = array(
-			'status' => $output,
+			'status' => "qwe",
 		);
 		$response = new Response(json_encode($response_data));
 		$response->headers->set('Content-Type', 'application/json');

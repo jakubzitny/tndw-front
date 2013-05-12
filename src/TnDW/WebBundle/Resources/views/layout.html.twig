@@ -4,7 +4,9 @@
     <head>
         <title>{% block title %}TNDW{% endblock %}</title>
         <link href="{{ asset('bundles/tndwweb/css/main.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/tndwweb/css/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery-1.8.3.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/tndwweb/js/jquery.fancybox.js') }}"></script>
     </head>
 
     <body>
@@ -36,10 +38,29 @@
                         <li class="news"><a href="{{ path('tndw_web_news') }}">News</a></li>
                         <li class="about"><a href="{{ path('tndw_web_about') }}">About</a></li>
                     </ul>
+                    <ul id="search">
+						<script type="text/javascript">
+							$(document).ready(function() {
+								$("#header-search").hide();
+								$('#header-search input').focusout(function() {
+									$("#header-search").slideUp(300);
+								});
+								$(".search").click(function() {
+									if ($("#header-search").css("display") == 'none') {
+										$("#header-search").slideDown(300);
+										$('#header-search input').focus();
+									} else {
+										$("#header-search").slideUp(300);
+									}
+								});
+							});
+						</script>
+                        <li class="search">Search</li>
+                    </ul>
                 </div>
                 <div id="header-search">
-                   	<form method="get" action="#">
-                        <input type="text" placeholder="search whatever you want" />
+                   	<form method="get" action="{{ path('tndw_web_search') }}">
+                        <input type="text" id="search" name="search" placeholder="search whatever you want" />
                      </form>
                 </div>
                 {% endblock %}
@@ -51,12 +72,13 @@
              </div>
              <!-- FOOTER -->
              <div id="footer">
-                <!--
 				{% block footer %}
-                <p>DISTROWATCH is the best source of information about Linux distributions and other operating systems.</p>
+				<div id="line"></div>
+                <span>The new Distrowatch is the best source of information about Linux distributions and other operating systems.</span>
+				<!--
                 <p align="right">HOME | DISTROS | UPDATES | NEWS | ABOUT </p>
+				-->
                 {% endblock %}
-                 -->
              </div>
 		</div>
         <!-- SCRIPTS -->

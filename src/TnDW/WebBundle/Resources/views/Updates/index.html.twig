@@ -3,10 +3,14 @@
 {% block selected %}updates{% endblock %}
 
 {% block body %}
-<div class="pagetitle">
-	<h2>Updates</h2>
-</div>
 <div id="updates" class="text">
+	<h2>Updates</h2>
+    {% for update in updates %}
+        <p class="perex"><b>{{update.title}}</b> {{update.text}} <a href="{{update.source}}">{{update.source}}</a></p>
+    {% endfor %}
+    {% for update in updates %}
+        <p class="perex"><b>{{update.title}}</b> {{update.text}} <a href="{{update.source}}">{{update.source}}</a></p>
+    {% endfor %}
     {% for update in updates %}
         <p class="perex"><b>{{update.title}}</b> {{update.text}} <a href="{{update.source}}">{{update.source}}</a></p>
     {% endfor %}

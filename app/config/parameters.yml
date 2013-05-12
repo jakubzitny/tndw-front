@@ -6,6 +6,13 @@ parameters:
     database_user:     postgres
     database_password: root
 
+    database_driver_trol:   pdo_pgsql
+    database_host_trol:     127.0.0.1
+    database_port_trol:     5432
+    database_name_trol:     troller
+    database_user_trol:     postgres
+    database_password_trol: root
+
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~

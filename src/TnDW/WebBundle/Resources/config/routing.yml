@@ -4,6 +4,14 @@ tndw_web_home:
     pattern:  /
     defaults: { _controller: TnDWWebBundle:Default:index }
 
+tndw_web_search_string:
+    pattern:  /search/{searchstring}
+    defaults: { _controller: TnDWWebBundle:Search:search }
+
+tndw_web_search:
+    pattern:  /search/
+    defaults: { _controller: TnDWWebBundle:Search:index }
+
 tndw_web_distros:
     pattern:  /distros/
     defaults: { _controller: TnDWWebBundle:Distros:index }

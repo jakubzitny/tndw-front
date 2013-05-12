@@ -39,22 +39,43 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        mapping_types:
-            enum: string
-            set: string
-            varbinary: string
-            tinyblob: text
+        default_connection: default
+        connections:
+            default:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+                mapping_types:
+                    enum: string
+                    set: string
+                    varbinary: string
+                    tinyblob: text
+            troller:
+                driver:   "%database_driver_trol%"
+                host:     "%database_host_trol%"
+                port:     "%database_port_trol%"
+                dbname:   "%database_name_trol%"
+                user:     "%database_user_trol%"
+                password: "%database_password_trol%"
+                charset:  UTF8
 
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        default_entity_manager:   default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    TnDWWebBundle: ~
+            troller:
+                connection:       troller
+                mappings:
+
+            auto_generate_proxy_classes: "%kernel.debug%"
+            auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:

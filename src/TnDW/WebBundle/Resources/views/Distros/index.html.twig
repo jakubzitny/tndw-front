@@ -4,23 +4,22 @@
 {% block selected %}distros{% endblock %}
 
 {% block body %}
-<div id="distro_select">
+<div id="distros">
     <ul>
         <li>top 100</li>
     </ul>
-</div>
-<div id="distrolist">
-    <div>
-        <ol>
-            {% for distro in distros %}
-            <li><a href="{{ path('tndw_web_distro', {'distro': distro.shortname}) }}">{{distro.name}}</a></li>
-            {% endfor %}
-        </ol>
-    </div>
+	<div id="distrolist">
+	    <div>
+	        <ol>
+	            {% for distro in distros %}
+	            <li><a href="{{ path('tndw_web_distro', {'distro': distro.shortname}) }}">{{distro.name}}</a></li>
+	            {% endfor %}
+	        </ol>
+	    </div>
+	</div>
 </div>
 <script type="text/javascript">
     function sortDistros() {
-        
     }
 </script>
 {% endblock %}

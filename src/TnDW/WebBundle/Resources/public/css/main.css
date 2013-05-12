@@ -1,10 +1,15 @@
-html { min-height:100%; position:relative; }
-body { margin: 0; height: 100%; }
+html { min-height: 100%; min-width: 100%; position:relative; background-color: #eee;  }
+body { margin: 0 0px 0 0px; padding: 0; height: 100%; }
+::selection { background: rgba(230, 157, 29, 0.3); }
+::-moz-selection { background: rgba(230, 157, 29, 0.3); }
+
+#container { min-height: 100%; }
+
+.clear { clear: both; }
 
 /* HEADER */
-#header { font-family: zektonrg;  }
-
-#header-top { height: 50px; width: 100%; margin-top: 20px; }
+#header { font-family: zektonrg; width: 1000px; margin: auto; background-color: #fff; }
+#header-top { height: 50px; padding-top: 20px; }
 #header-top p { position: absolute; top: 20px; left: 40px; }
 
 #header-title { position: relative; float: left; height: 50px }
@@ -26,25 +31,30 @@ body { margin: 0; height: 100%; }
 #header-menu ul li:hover a { color: rgb(230, 157, 29); 
                              -webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s }
 
+#header-menu #search { cursor: pointer; float: right; margin: -22px 30px 0px 0; color: #fff }
+#header-menu #search:hover { cursor: pointer; float: right; margin: -22px 30px 0px 0; color: rgb(230, 157, 29); -webkit-transition: color 0.3s }
+ 
 .unselected { color: #fff; }
 .selected a { color: rgb(230, 157, 29); }
 
-#header-search { float:right; margin-right: 10px; }
-#header-search input { font-family: myriadpro; width: 150px; margin: 0; padding: 0 10px 0 10px; outline: none; background: #f0f0f0; border: 1px solid #f0f0f0; height: 30px; font-size: 12px; 
+#header-search { z-index: 32767; position:absolute; text-align: center; left: 50%; margin-left: -225px }
+#header-search input { font-family: myriadpro; width: 450px; margin: 0; padding: 0 10px 0 10px; outline: none; background: #f0f0f0; border: 1px solid #f0f0f0; height: 30px; font-size: 12px; 
                        -webkit-transition: width 0.2s; -moz-transition: width 0.2s; -o-transition: width 0.2s; transition: width 0.2s }
-#header-search input:focus { width: 450px; -webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s; /*-webkit-box-shadow: 0 5px rgba(88, 89, 91, 1);*/  }
+#header-search input:focus { width: 450px; height: 30px; -webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s; /*-webkit-box-shadow: 0 5px rgba(88, 89, 91, 1);*/  }
 /*#header-search input::selection { background: #ffb7b7; }
 #header-search input::-moz-selection { background: #ffb7b7; }
 */
 
 /* BODY */
-#body { margin: 50px 50px 10px 80px; height: 100%; }
+#body { width: 1000px; height: 100%; margin: auto; padding-bottom: 100px; background-color: #fff; }
 
 /* GENERAL */
-.pagetitle h2 { font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
+h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonbo; font-size: 24px; color: rgb(230, 157, 29); }
+.pagetitle h5 { text-align: center; font-family: zektonbo; font-size: 14px; color: #ccc; margin-top: -15px; }
 .text {font-family: myriadpro; font-size: 12px; }
 
 /* HOME */
+#home { margin: 0px 50px 10px 50px; padding: 50px 0 0 0; }
 #home-top { width: 20%; float: left; height: 100%; }
 #home-top-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
 #home-top-body { font-family: myriadpro; font-size: 13px; color: #555;  }
@@ -70,12 +80,14 @@ body { margin: 0; height: 100%; }
 .perex a:hover { text-decoration: none; color: rgb(230, 157, 29); }
 
 /* DISTROS */
-#distro_select { font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
-#distro_select ul { list-style: none; list-style-type: none; }
-#distro_select ul li { display: inline; padding: 0 10px 0 10px; cursor: pointer }
-#distro_select ul li:hover { color: rgb(88, 89, 91); -webkit-transition: all 0.3s; }
+#distros { height: 100%; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
+#distros ul { list-style: none; list-style-type: none; }
+#distros ul li { display: inline; padding: 0 10px 0 10px; cursor: pointer }
+#distros ul li:hover { color: rgb(88, 89, 91); -webkit-transition: all 0.3s; }
 
 #distrolist { margin: 10px 0 0 0; text-align: left; font-family: "Myriad Pro"; font-size: 12px;
+          column-count: 5; column-gap: 10px; 
+          -moz-column-count: 5; -moz-column-gap: 10px; -moz-column-width: 30px;
           -webkit-column-count: 5; -webkit-column-gap: 10px; -webkit-column-width: 30px; }
 #distrolist div ol { }
 #distrolist div ol li { font-family: myriadpro; font-size: 12px; color: rgb(88, 89, 91) }
@@ -83,21 +95,94 @@ body { margin: 0; height: 100%; }
        font-size: 12px; text-decoration: none; color: rgb(88, 89, 91) }
 #distrolist div ol li a:hover { font-family: myriadpro; font-size: 12px; text-decoration: none; color: rgb(230, 157, 29)}
 
+#distro { margin: 0 0px 0 0px; padding: 0; }
+#distro h3 { margin: 50px 50px 0 50px; color: rgb(88, 89, 91) ; font-family: zektonbo; font-size: 16px; text-align: center; }
+#distro #description { width: 60%; margin: auto; text-align: center; font-family: myriadpro; font-size: 13px; }
+
+#distro #contents { position: fixed; left: 20px; top: 200px; }
+#distro #contents ul { font-family: zektonrg; font-size: 12px; color: rgb(88, 89, 91); }
+#distro #contents li { margin: 2px 0 0px 0; list-style: none; list-style-type: none; background-color: rgb(88, 89, 91); -webkit-transition: background-color 0.4s; }
+#distro #contents li a { padding: 6px 10px 6px 10px; text-decoration: none; color: #fff; margin: 0px; display: block; width: 100%; height: 100%; }
+#distro #contents li:hover { background-color: rgb(230, 157, 29); text-decoration: none; color: #fff; cursor: pointer; -webkit-transition: background-color 0.2s; }
+
+#distro #links { text-align: center; font-family: zektonrg; color: #fff; font-size: 14px; margin-bottom: 50px; }
+#distro #links ul { margin: 0; padding: 0; }
+#distro #links ul li { display: inline; list-style: none; list-style-type: none; background-color: rgb(230, 157, 29); cursor: pointer; margin-bottom: 5px; padding: 5px 10px 5px 10px; }
+#distro #links ul li a {  -webkit-transition: all 0.4s;background-color: rgb(230, 157, 29); color: #fff; cursor: pointer; text-decoration: none; }
+#distro #links ul li:hover { -webkit-box-shadow: 0px 0px 5px #ccc; color: #ccc; -webkit-transition: all 0.2s; }
+#distro #links ul li:hover a { color: #ccc; -webkit-transition: all 0.2s; }
+
+#distro #links ul li ul { display: none; position: relative; margin: 5px 0 0 -100px; }
+#distro #links ul li:hover ul { color: #fff; display: block; -webkit-box-shadow: 0px 0 0px #fff; position: absolute; }
+#distro #links ul li:hover ul li { position: relative; list-style: none; list-style-type: none; margin: 0px 0 0 0px; }
+#distro #links ul li:hover ul li:hover { background-color: #000; color: #fff; -webkit-box-shadow: 0px 0 0px #fff; }
+#distro #links ul li:hover ul li:hover a { background-color: #000 }
+
+#distro #deploy { text-align: center; margin: auto; width: 600px; }
+#distro #deploy a { font-family: zektonrg; padding: 5px 10px 5px 10px; background-color: rgb(230, 157, 29); color: #fff; text-decoration: none; }
+#distro #deploy a:hover { background-color: rgb(88, 89, 91); cursor: pointer; }
+
+#distro #status { text-align: center; margin: 0px 0 0px 0; color: #ccc; font-family: zektonrg; font-size: 13px; }
+
+
+#distro #technical { text-align: left; font-family: myriadpro; margin: auto auto 50px auto; width: 700px; font-family: myriadpro; font-size: 14px; }
+#distro #technical ul { font-weight: bold; font-size: 13px; padding: 0 50px 0 50px; }
+#distro #technical hr { width: 80%; color: #ccc; background-color: #ccc; border: 0; height: 1px; float: left; }
+#distro #technical ul li { font-weight: normal; display: inline; list-style: none; list-style-type: none; }
+#distro #technical ul li a { text-decoration: none; color: #000; }
+#distro #technical ul li:hover { background-color: #ccc; cursor: pointer; }
+
+.green-circle { -webkit-border-radius: 50%; width: 6px; height: 6px; background-color: rgb(67, 226, 59); }
+.red-circle { -webkit-border-radius: 50%; width: 10px; height: 10px; background-color: rgb(230, 15, 15); }
+
+#distro #screenshots { text-align: center; margin: 0 0 50px 0; }
+#distro #screenshots a { cursor: default }
+#distro #screenshots #more { margin: -30px 0 0 0;  }
+#distro #screenshots #more span { padding: 5px 10px 5px 10px; font-family: zektonrg; background-color: #f90; color: #fff; cursor: pointer; z-index: 10; width: 50px; text-align: center; }
+
+#distro #cols { width: 760px; margin: auto; }
+
+#distro #cols #left { width: 80%; height: 500px; float: left; }
+#distro #cols #left h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 0; color: rgb(88, 89, 91); }
+#distro #cols #left #distro-updates { font-family: myriadpro; font-size: 13px; color: #555; margin: 0 50px 0 0px; text-align:justify; text-justify:inter-word;  }
+
+#distro #cols #right { width: 19%; height: 500px; overflow: auto; float: left; border-left: 1px solid #ccc }
+#distro #cols #right h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(88, 89, 91); }
+#distro #cols #right #reviews { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 10px;  }
+#distro #cols #right #websites { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 10px;  }
+
+#distro #software { margin: auto; text-align: center; width: 600px; font-family: myriadpro; font-size: 14px; }
+#distro #software p { margin: 0; }
+
+#distro #country { margin: 200px 0 300px 0; font-family: zektonrg; }
+#distro #country p { z-index: 20; }
+#distro #country #bg { width: 500px; height: 500px; margin: -200px 0 0 500px ; position: absolute; z-index: 0; }
+
+/*#distro-body #right { float:right; z-index: 2; }
+#distro-body #right img { margin-right: 0px }
+#distro #screenshots a { background-color: #f90; color: #ccc; padding: 2px 5px 2px 5px; text-decoration: none;}
+#distro #screenshots a:hover { text-decoration: none; }
+*/
+
 /* UPDATES */
+#updates { height: 100%; width: 800px; margin: auto; }
 #updates p { text-align: justify; text-justify: inter-word; }
 
 /* NEWS */
+#news { height: 100%; width: 800px; margin: auto; }
 #news p { text-align: justify; text-justify: inter-word; }
 
 /* ABOUT */
+#about { width: 800px; margin: auto; }
 #about p { text-align: justify; text-justify: inter-word; }
 #about-contact { }
 #about-contact input[type=text], #about-contact input[type=email] { outline: none; height: 20px; }
 #about-contact textarea { height: 50px;  }
 
 /* FOOTER */
-#footer { width: 100%; background: rgb(88, 89, 91); position: fixed; bottom: 0; left:0 }
-#footer p { font-family: myriadpro; font-size: 12px; padding-left: 20px; color: #ccc }
+#footer { width: 1000px; height: 30px;text-align: center; margin: auto; background-color: #fff; }
+#footer span { font-family: myriadpro; font-size: 12px; padding-left: 20px; color: rgb(88, 89, 91); }
+#footer #line { position: absolute; bottom: 0; width: 800px; height: 6px; background-color: rgb(88, 89, 91); left:0; right:0; margin-left:auto; margin-right:auto; }
 
 /* FONTS */
 @font-face{

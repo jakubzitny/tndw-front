@@ -3,11 +3,14 @@
 {% block selected %}news{% endblock %}
 
 {% block body %}
-<div class="pagetitle">
-	<h2>News</h2>
-</div>
 <div id="news" class="text">
+	<h2>News</h2>
     {% for article in news %}
+        <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
+        <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
+        <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
+        <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
+        <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
         <p class="perex"><b>{{article.title}}</b> {{article.text}} <a href="{{article.source}}">{{article.source}}</a></p>
     {% endfor %}
 </div>

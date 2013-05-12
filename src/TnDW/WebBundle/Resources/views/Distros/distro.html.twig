@@ -1,25 +1,208 @@
 {% extends "TnDWWebBundle::layout.html.twig" %}
 
+{% block title %}Distrowatch | {{distrodata.name}}{% endblock %}
 {% block selected %}distros{% endblock %}
 
 {% block body %}
-<div id="distro" class="pagetitle">
-<h2>{{distro.name}}</h2>
-<p>
-{{distro.os}}<br />
-{{distro.homepage}}<br />
-{{distro.wikipage}}<br />
-{{distro.description}}<br />
-{{distro.status}}
-</p>
-</div>
-<div id="links">
-	<div id="deployBtn">
-		<span style="background-color: #f90; cursor: pointer">Deploy</span>
-		<br />
-		<span id="result"></span>
+<div id="distro">
+	<div class="pagetitle">
+		<a name="desc-link"></a>
+		<h2>{{distrodata.name}}</h2>
+		<h5>{{distrodata.os_type|lower}}</h5>
 	</div>
+
+	<div id="contents">
+		<ul>
+			Jump to
+			<li><a href="#desc-link">Description</a></li>
+			<li><a href="#deploy">Deploy</a></li>
+			<li><a href="#technical">Technical</a></li>
+			<li><a href="#screenshots">Screenshots</a></li>
+			<li><a href="#distro-updates">Updates</a></li>
+			<li><a href="#software">Software</a></li>
+		</ul>
+	</div>
+
+	<div id="description">
+		<p>{{distrodata.description}}</p>
+	</div>
+
+	<div id="links">
+		<ul>
+			<li><a href={{distrodata.links['homepage'][0].href}}>Homepage</a></li>
+			{% if distrodata.links['download_mirrors'] is defined and distrodata.links['download_mirrors']|length > 0 %}
+			<li><a href={{distrodata.links['download_mirrors'][0].href}}>Download</a></li>
+			{% endif %}
+			{% if distrodata.links['user_forums'] is defined and distrodata.links['user_forums']|length > 0 %}
+			<li><a href={{distrodata.links['user_forums'][0].href}}>Forums</a></li>
+			{% endif %}
+			{% if distrodata.links['documentations'] is defined and distrodata.links['documentations']|length > 0 %}
+			<li><a href={{distrodata.links['documentations'][0].href}}>Documentations</a></li>
+			{% endif %}
+			{% if distrodata.links['mailing_lists'] is defined and distrodata.links['mailing_lists']|length > 0 %}
+			<li><a href={{distrodata.links['mailing_lists'][0].href}}>Mailing Lists</a></li>
+			{% endif %}
+			{% if distrodata.links['bug_trackers'] is defined and distrodata.links['bug_trackers']|length > 0 %}
+			<li><a href={{distrodata.links['bug_trackers'][0].href}}>Bug Tracker</a></li>
+			{% endif %}
+			<!--
+			<li><a href="http://en.wikipedia.org/w/index.php?search={{distrodata.name}}">Wikipedia</a></li>
+			<li><a style="color: red" id="deployBtn">Deploy</a></li>
+			-->
+		</ul>
+	</div>
+
+	<div id="deploy">
+		<h3>Try {{distrodata.name}}</h3>
+		<br />
+		<a id="deployBtn">Deploy</a>
+		<p id="result"></p>
+	</div>
+
+	<div id="technical">
+		<h3>Technical details</h3>
+		<div id="status">
+			{% if distrodata.status == "Active" %}
+			<p>{{distrodata.name | lower}} is being actively developed</p>
+			{% else %}
+			<p>{{distrodata.name | lower}} is not active anymore</p>
+			{% endif %}
+		</div>
+
+		<!-- desktops -->
+		{% if distrodata.desktops is defined and distrodata.desktops | length > 0 %}
+		<ul>{{distrodata.name}} comes with<br />
+		{% for desktop in distrodata.desktops %}
+			<li>{{desktop.name | lower}}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		<!-- architectures -->
+		<hr><br />
+		{% if distrodata.architectures is defined and distrodata.architectures | length > 0 %}
+		<ul>{{distrodata.name}} runs on<br />
+		{% for architecture in distrodata.architectures %}
+			<li>{{architecture.name}}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		<!-- categories -->
+		<hr><br />
+		{% if distrodata.categories is defined and distrodata.categories | length > 0 %}
+		<ul>{{distrodata.name}} is suitable for<br />
+		{% for category in distrodata.categories %}
+			<li>{{category.name | lower }}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		<!-- basedons -->
+		{% if distrodata.basedons is defined and distrodata.basedons | length > 0 %}
+		<hr><br />
+		<ul>{{distrodata.name}} is based on<br />
+		{% for basedon in distrodata.basedons %}
+			<li><a href="{{ path('tndw_web_distro', { 'distro': basedon.shortname}) }}">{{basedon.name}}</a></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		<!-- inspireds -->
+		{% if distrodata.inspireds is defined and distrodata.inspireds | length > 0 %}
+		<hr><br />
+		<ul>{{distrodata.name}} inspired<br />
+		{% for inspired in distrodata.inspireds %}
+			<li><a href="{{ path('tndw_web_distro', { 'distro': inspired.shortname}) }}">{{inspired.name}}</a></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+	</div>
+
+
+	<div id="screenshots">
+		<script type="text/javascript">
+   			$(document).ready(function() {
+   			    $(".screenshot").attr('rel', 'gallery').fancybox({
+					padding : 0,
+					nextEffect : 'fade',
+   				 	prevEffect : 'none',
+       				autoCenter : false,
+					helpers : {
+						title: { type: 'outside' },
+   					    overlay : {
+   				        	css : { 'background' : 'rgba(260, 260, 260, 0.75)' }
+   				     	}
+   				 	},
+					afterLoad : function() {
+                    	this.title = '{{distrodata.name}} screen ' + (this.index + 1) + ' of ' + this.group.length;
+                	}
+				});
+   			});
+		</script>
+		<a class="screenshot" rel="group" href="{{distrodata.screenshot_default.link}}"><img width="800px" src="{{distrodata.screenshot_default.link}}" /></a>
+		{% for shot in distrodata.screenshots %}
+		<a class="screenshot" rel="group" href="{{shot.link}}"></a>
+		{% endfor %}
+		<!--
+		<div id="more">
+			<span>Click to see more screenshots</span>
+		</div>
+		-->
+	</div>
+
+	<div id="cols">
+		<div id="left">
+			<div id="distro-updates">
+				<h2>Latest updates</h2>
+        		{% for article in news %}
+        		    <p class="perex"><b>{{article.title}}</b> {{article.text}} <a class="source" href="{{article.source}}">{{article.source}}</a></p>
+        		    <p class="perex"><b>{{article.title}}</b> {{article.text}} <a class="source" href="{{article.source}}">{{article.source}}</a></p>
+        		    <p class="perex"><b>{{article.title}}</b> {{article.text}} <a class="source" href="{{article.source}}">{{article.source}}</a></p>
+        		    <p class="perex"><b>{{article.title}}</b> {{article.text}} <a class="source" href="{{article.source}}">{{article.source}}</a></p>
+        		{% endfor %}
+			</div>
+		</div>
+
+		<div id="right">
+			<h2>Reviews</h2>
+			<div id="reviews">
+				{% if distrodata.links['reviews'] is defined %}
+		        {% for link in distrodata.links['reviews'] %}
+					<a href={{link.href}}>{{link.name}}</a><br/>
+		        {% endfor %}
+				{% endif %}
+		    </div>
+			<h2>Related websites</h2>
+			<div id="websites">
+				{% if distrodata.links['related_websites'] is defined %}
+		        {% for link in distrodata.links['related_websites'] %}
+					<a href={{link.href}}>{{link.name}}</a><br/>
+		        {% endfor %}
+				{% endif %}
+		    </div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<div id="software">
+		<h3>Software</h3>
+		<p>TODO</p>
+	</div>
+
+	<!--
+	<h3>Origin</h3>
+	<div id="country">
+		<p><span class="keyword">{{distrodata.name}}</span> is a <a href="#">{{distrodata.os_type}}</a> operating system coming from <a href="#">{{distrodata.origin}}</a>.</p>
+		<div id="bg" style="background: url({{countryurl}}) no-repeat"></div>
+		</div>
+	</div>
+	-->
+
 </div>
+
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -73,16 +256,16 @@ $(document).ready(function() {
             timeout:50000, /* Timeout in ms */
 
             success: function(data){ /* called when request to barge.php completes */
-				$("#deployBtn #result").text('loading...');
-				console.log('...');
-				console.log(data);
+				$("#deploy #result").text('loading...');
+				console.log("...");
+				//console.log(data);
 				if(data.status != "qwe"){
                 	setTimeout(
                 	    waitForMsg, /* Request next message */
-                	    1000 /* ..after 1 seconds */
+                	    3000 /* ..after 1 seconds */
                 	);
 				} else {
-					$("#deployBtn #result").text('done');
+					$("#deploy #result").text('done');
 				}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -93,13 +276,44 @@ $(document).ready(function() {
             }
         });
     };
+
+	function sendMsg(){
+		$("#deploy #result").text('sending message');
+        $.ajax({
+            type: "POST",
+            url: document.URL + "/deploy/" + {{distrodata.shortname}},
+
+            async: true, /* If set to non-async, browser shows page as "Loading.."*/
+            cache: false,
+            timeout:50000, /* Timeout in ms */
+
+            success: function(data){ /* called when request to barge.php completes */
+				$("#deploy #result").text('message sent');
+				//console.log(data);
+				if(data.status == 1){
+					$("#deploy #result").text('waiting for deployment');
+					waitForMsg();
+				} else {
+					$("#deploy #result").text('fail');
+				}
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+				console.log('err');
+                setTimeout(
+                    waitForMsg, /* Try again after.. */
+                    15000); /* milliseconds (15seconds) */
+            }
+        });
+    };
+
+
+	}
 	
 	$("#deployBtn").click(function() {
-		waitForMsg();
+		sendMsg();
 	});
 
 });
 </script>
-
 
 {% endblock %}
