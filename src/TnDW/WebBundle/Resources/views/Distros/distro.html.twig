@@ -129,6 +129,8 @@
 					nextEffect : 'fade',
    				 	prevEffect : 'none',
        				autoCenter : false,
+					arrows : false,
+					nextClick: true,
 					helpers : {
 						title: { type: 'outside' },
    					    overlay : {
@@ -305,9 +307,6 @@ $(document).ready(function() {
             }
         });
     };
-
-
-	}
 	
 	$("#deployBtn").click(function() {
 		sendMsg();
