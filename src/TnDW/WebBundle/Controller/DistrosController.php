@@ -28,7 +28,7 @@ class DistrosController extends Controller {
         
 		# Fetch troller distro data
 		$parameters = $this->container->parameters;
-		$ph = pg_Connect("dbname=".$parameters['database_name_trol']." user=".$parameters['database_name_trol']." password=".$parameters['database_password_trol']);
+		$ph = pg_Connect("dbname=".$parameters['database_name_trol']." user=".$parameters['database_user_trol']." password=".$parameters['database_password_trol']);
 	  	$result = pg_query($ph, "select * from backing_distribution where shortname ilike '" . $distro . "'");
 		#todo check for found
     	$distrodata = pg_fetch_object($result);
@@ -155,8 +155,9 @@ class DistrosController extends Controller {
 		$cid = 123;
 		sleep(5);
 		\Predis\Autoloader::register();
-		$redis = new Predis\Client('tcp://localhost:6379');
-		$redis->auth('lcPi2ouVfjDQzRGA7ZUcC2Wc9yQQRRh');
+		$parameters = $this->container->parameters;
+		$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
+		$redis->auth($parameters['redis_password']);
 		# either subscribe or get by cid
 		#$output = $redis->publish('cloud', 'deploy:' . $distro);
 		$output = $redis->get("asd");
@@ -195,11 +196,12 @@ class DistrosController extends Controller {
 		#}
 		
 		#$output = $process->getOutput();
-		$cid = 123;
+		$cid = md5(mt_rand());
 
 		\Predis\Autoloader::register();
-		$redis = new Predis\Client('tcp://localhost:6379');
-		$redis->auth('lcPi2ouVfjDQzRGA7ZUcC2Wc9yQQRRh');
+		$parameters = $this->container->parameters;
+		$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
+		$redis->auth($parameters['redis_password']);
 		$output = $redis->publish('cloud', $cid . ':0:deploy_' . $distro); // could be distro_id yet?
 
 		$id = 123; // id from backend
