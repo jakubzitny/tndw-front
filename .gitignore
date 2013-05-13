@@ -2,8 +2,7 @@
 /app/logs/dev.log
 /app/logs/prod.log
 /app/cache
-/web/.DS_Store
-/.DS_Store
+.DS_Store
 /src/TnDW/WebBundle/Resources/public/directory
 /web/bundles/
 /app/bootstrap*
