@@ -143,9 +143,9 @@
 				});
    			});
 		</script>
-		<a class="screenshot" rel="group" href="{{distrodata.screenshot_default.link}}"><img width="800px" src="{{distrodata.screenshot_default.link}}" /></a>
+		<a class="screenshot" rel="group" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800px" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
 		{% for shot in distrodata.screenshots %}
-		<a class="screenshot" rel="group" href="{{shot.link}}"></a>
+		<a class="screenshot" rel="group" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
 		{% endfor %}
 		<!--
 		<div id="more">
@@ -258,13 +258,12 @@ $(document).ready(function() {
             timeout:50000, /* Timeout in ms */
 
             success: function(data){ /* called when request to barge.php completes */
-				$("#deploy #result").text('loading...');
-				console.log("...");
+				console.log("loading");
 				//console.log(data);
-				if(data.status != "qwe"){
+				if(data.response != 0){
                 	setTimeout(
                 	    waitForMsg, /* Request next message */
-                	    3000 /* ..after 1 seconds */
+                	    5000 /* ..after 1 seconds */
                 	);
 				} else {
 					$("#deploy #result").text('done');
@@ -273,7 +272,7 @@ $(document).ready(function() {
             error: function(XMLHttpRequest, textStatus, errorThrown){
 				console.log('err');
                 setTimeout(
-                    waitForMsg, /* Try again after.. */
+                    waitForMsg(), /* Try again after.. */
                     15000); /* milliseconds (15seconds) */
             }
         });
@@ -283,7 +282,7 @@ $(document).ready(function() {
 		$("#deploy #result").text('sending message');
         $.ajax({
             type: "POST",
-            url: document.URL + "/deploy/" + {{distrodata.shortname}},
+            url: document.URL + "/deploy",
 
             async: true, /* If set to non-async, browser shows page as "Loading.."*/
             cache: false,
@@ -292,17 +291,20 @@ $(document).ready(function() {
             success: function(data){ /* called when request to barge.php completes */
 				$("#deploy #result").text('message sent');
 				//console.log(data);
-				if(data.status == 1){
+				if(data.response == 0){
 					$("#deploy #result").text('waiting for deployment');
 					waitForMsg();
+				} else if (data.response == -1) {
+					$("#deploy #result").text('not logged in');
 				} else {
-					$("#deploy #result").text('fail');
+					console.log(data)
+					$("#deploy #result").text('failed');
 				}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
 				console.log('err');
                 setTimeout(
-                    waitForMsg, /* Try again after.. */
+                    sendMsg(), /* Try again after.. */
                     15000); /* milliseconds (15seconds) */
             }
         });
