@@ -24,9 +24,11 @@ class DistrosController extends Controller {
     }
     
     public function distroAction($distro){
+
         
 		# Fetch troller distro data
-		$ph = pg_Connect("dbname=troller user=postgres password=root");
+		$parameters = $this->container->parameters;
+		$ph = pg_Connect("dbname=".$parameters['database_name_trol']." user=".$parameters['database_name_trol']." password=".$parameters['database_password_trol']);
 	  	$result = pg_query($ph, "select * from backing_distribution where shortname ilike '" . $distro . "'");
 		#todo check for found
     	$distrodata = pg_fetch_object($result);
