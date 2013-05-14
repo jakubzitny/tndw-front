@@ -194,9 +194,13 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 /* ABOUT */
 #about { width: 800px; margin: auto; }
 #about p { text-align: justify; text-justify: inter-word; }
-#about-contact { }
-#about-contact input[type=text], #about-contact input[type=email] { outline: none; height: 20px; }
+#about-contact { text-align: center; }
+#about-contact p { text-align: center; }
 #about-contact textarea { height: 50px;  }
+#about input[type=text], #about input[type=email] { height: 30px; width: 200px; text-align: center; border: 1px solid rgba(230, 157, 29, 0.5); background-color: rgba(230, 157, 29, 0.2); }
+#about textarea { margin-top: 10px;  border: 1px solid rgba(230, 157, 29, 0.5); background-color: rgba(230, 157, 29, 0.2); width: 600px; height: 200px; resize: none; }
+#about #docs { text-align: center; }
+#about #docs a { margin: 10px; }
 
 /* FOOTER */
 #footer { width: 1000px; height: 30px;text-align: center; margin: auto; background-color: #fff; }
