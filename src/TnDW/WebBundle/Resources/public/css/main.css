@@ -130,6 +130,7 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 #distro #links ul li:hover ul li:hover a { background-color: #000 }
 
 #distro #deploy { text-align: center; margin: auto; width: 600px; }
+#distro #deploy #result { font-family: myriadpro; font-size: 12px; color: rgb(88, 89, 91); }
 #distro #deploy a { font-family: zektonrg; padding: 5px 10px 5px 10px; background-color: rgb(230, 157, 29); color: #fff; text-decoration: none; }
 #distro #deploy a:hover { background-color: rgb(88, 89, 91); cursor: pointer; }
 #distro #deploy table {border-collapse:collapse; text-align: center; margin: auto; font-family: myriadpro; font-size: 13px; }
