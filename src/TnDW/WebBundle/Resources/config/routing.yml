@@ -20,6 +20,10 @@ tndw_web_distro:
     pattern:  /distro/{distro}
     defaults: { _controller: TnDWWebBundle:Distros:distro }
 
+tndw_web_distro_vnc:
+    pattern:  /distro/{distro}/vnc
+    defaults: { _controller: TnDWWebBundle:Distros:vnc }
+
 tndw_web_distro_deploy:
     pattern:  /distro/{distro}/deploy
     defaults: { _controller: TnDWWebBundle:Distros:deploy }

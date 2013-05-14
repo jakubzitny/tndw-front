@@ -127,11 +127,29 @@ class DistrosController extends Controller {
         $topupdates = array_slice($updates, 0, 2);
         $topnews = array_slice($news, 0, 2);
 
+		# deployment
+		$user = $this->getUser();
+		if (!$user) {
+			$deployStatus = false;
+		} else {
+			\Predis\Autoloader::register();
+			$parameters = $this->container->parameters;
+			$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
+			$redis->auth($parameters['redis_password']);
+			$cid = $redis->get($user->getId() . '.' . $distrodata->shortname);
+			if (!$cid) {
+				$deployStatus = false;
+			} else {
+				$deployStatus = true;
+			}
+		}
+
         return $this->render('TnDWWebBundle:Distros:distro.html.twig', array(
         	'distrodata' => $distrodata,
 			'countryurl' => $countryurl,
             'news' => $topnews,
             'updates' => $topupdates,
+			'deployStatus' => $deployStatus,
         ));
     }
 
@@ -151,70 +169,131 @@ class DistrosController extends Controller {
 		return substr($result[0], 0, strpos($result[0], '"'));
 	}
 
-	public function isDeployedAction(/*$cid*/){
-		$cid = 123;
-		sleep(5);
-		\Predis\Autoloader::register();
-		$parameters = $this->container->parameters;
-		$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
-		$redis->auth($parameters['redis_password']);
-		# either subscribe or get by cid
-		#$output = $redis->publish('cloud', 'deploy:' . $distro);
-		$output = $redis->get("asd");
-		# parse response if output is not nil
-		$response_data = array(
-			'status' => "qwe",
-		);
+	public function isDeployedAction($distro){
+		$user = $this->getUser();
+		if (!$user) {
+			$response_data = array(
+				'response' => -1,
+				'message' => 'not logged in'
+			);
+		} else {
+			\Predis\Autoloader::register();
+			$parameters = $this->container->parameters;
+			$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
+			$redis->auth($parameters['redis_password']);
+			$cid = $redis->get($user->getId() . '.' . $distro);
+			if (!$cid) {
+				$response_data = array(
+					'response' => -1,
+					'message' => 'error'
+				);
+			} else {
+				$state = $redis->get($cid);
+				if (preg_match('/deployed_.*/', $state)) {
+					$data_raw = preg_split('/_/', $state);
+					$data = preg_split('/:/', $data_raw[1]);
+					$response_data = array(
+						'response' => 0,
+						'message' => 'deployed',
+						'username' => $data[0],
+						'password' => $data[1],
+						'ip' => $data[2],
+						'vnc_host' => $data[3],
+						'vnc_port' => $data[4],
+						'vnc_password' => $data[5],
+					);
+				} else if ($state == 'failed') {
+					$response_data = array(
+						'response' => -1,
+						'message' => 'failed'
+					);
+				} else {
+					$response_data = array(
+						'response' => 1,
+						'message' => $state
+					);
+				}
+			}
+		}
 		$response = new Response(json_encode($response_data));
 		$response->headers->set('Content-Type', 'application/json');
 		return $response;
 	}
-		
+
 	public function deployAction($distro){
 		//
-		// prenes do dalsej action ktora to deployne
-		// tato len skontroluje ci user uz nedeployoval a ci je lognuty a ma prava
+		// len skontroluje ci user uz nedeployoval a ci je lognuty a ma prava
 		// a este aj ci neni uloha prave vykonavana aby zobrazil loading
 		// bude vracat message userovi (poloflash) (has been deployed a tak)
 		// a tak
 		//
 
-		#$retval = null;
-		#$output = array();
-		#//exec('python3 rpyc_communicator deploy ' + $distro, $output, $retval);
-		#$output_lastline = exec('python3 ../src/TnDW/WebBundle/ServerCommunicator/communicator.py', $output, $retval);
-		#if ($retval != 0) {
-		#	return "error";
-		#}
+		$user = $this->getUser();
+		if (!$user) {
+			$response_data = array(
+				'response' => -1,
+				'message' => 'not logged in'
+			);
+		} else {
+			\Predis\Autoloader::register();
+			$parameters = $this->container->parameters;
+			$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
+			$redis->auth($parameters['redis_password']);
+			$cid = $redis->get($user->getId() . '.' . $distro);
+			if (!$cid) {
+				$cid = md5(mt_rand());
+				$redis->set($user->getId() . '.' . $distro, $cid);
+				$redis->set($cid, 'deploying');
+				$output = $redis->publish('cloud', $cid . ':0:deploy_' . $user->getId() . '_' .$distro);
+			}
+			$response_data = array(
+				'response' => 0,
+				'message' => 'loading',
+				'distro' => $distro,
+			);
+		}
+		$response = new Response(json_encode($response_data));
+		$response->headers->set('Content-Type', 'application/json');
+		return $response;
+	}
 
-		#$process = new Process('./bundles/tndwweb/ServerCommunicator/communicator.py');
-		#$process = new Process('/usr/local/bin/python3 bundles/tndwweb/ServerCommunicator/communicator.py');
-		#$process->setTimeout(3600);
-		#$process->run();
-		#if (!$process->isSuccessful()) {
-		#    throw new \RuntimeException($process->getErrorOutput());
-		#}
-		
-		#$output = $process->getOutput();
-		$cid = md5(mt_rand());
-
+    public function vncAction($distro){
+		if ($this->container->has('profiler')) {
+			$this->container->get('profiler')->disable();
+		}
+		$user = $this->getUser();
+		if (!$user) {
+			return $this->redirect($this->generateUrl('tndw_web_distro', array('distro' => $distro)));
+		}
 		\Predis\Autoloader::register();
 		$parameters = $this->container->parameters;
 		$redis = new Predis\Client('tcp://'.$parameters['redis_host'].':'.$parameters['redis_port']);
 		$redis->auth($parameters['redis_password']);
-		$output = $redis->publish('cloud', $cid . ':0:deploy_' . $distro); // could be distro_id yet?
+		$cid = $redis->get($user->getId() . '.' . $distro);
+		if (!$cid) {
+			return $this->redirect($this->generateUrl('tndw_web_distro', array('distro' => $distro)));
+		} else {
+			$state = $redis->get($cid);
+			if (preg_match('/deployed_.*/', $state)) {
+				$data_raw = preg_split('/_/', $state);
+				$data = preg_split('/:/', $data_raw[1]);
+				$username = $data[0];
+				$password = $data[1];
+				$vnc_host = $data[3];
+				$vnc_port = $data[4];
+				$vnc_password = $data[5];
+			} else {
+				return $this->redirect($this->generateUrl('tndw_web_distro', array('distro' => $distro)));
+			}
+		}
 
-		$id = 123; // id from backend
-		$link = "/tryout/" . $id;
-		$response_data = array(
-			'distro' => $distro,
-			'link' => $link,
-			'output' => $output,
-			'cid' => $cid
-		);
-		$response = new Response(json_encode($response_data));
-		$response->headers->set('Content-Type', 'application/json');
-		return $response;
+        return $this->render('TnDWWebBundle:Distros:flashlight.html.twig', array(
+			'username' => $username,
+			'password' => $password,
+			'vnc_host' => $vnc_host,
+			'vnc_port' => $vnc_port,
+			'vnc_password' => $vnc_password,
+        ));
 	}
 
 }

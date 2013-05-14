@@ -52,19 +52,39 @@
 			{% if distrodata.links['bug_trackers'] is defined and distrodata.links['bug_trackers']|length > 0 %}
 			<li><a href={{distrodata.links['bug_trackers'][0].href}}>Bug Tracker</a></li>
 			{% endif %}
-			<!--
-			<li><a href="http://en.wikipedia.org/w/index.php?search={{distrodata.name}}">Wikipedia</a></li>
-			<li><a style="color: red" id="deployBtn">Deploy</a></li>
-			-->
 		</ul>
 	</div>
 
+	{% if deployStatus %}
+	<div id="deploy">
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#vnc').fancybox({
+					width : '80%',
+					height  : '80%',
+					padding : 0,
+					helpers : {
+						overlay : {
+							css : { 'background' : 'rgba(260, 260, 260, 0.75)' }
+						}
+					},
+				});
+			});
+		</script>
+		<h3>Try {{distrodata.name}}</h3>
+		<p id="result"></p>
+	</div>
+	{% else %}
 	<div id="deploy">
 		<h3>Try {{distrodata.name}}</h3>
 		<br />
 		<a id="deployBtn">Deploy</a>
 		<p id="result"></p>
+		<div id="deployInfo">
+			<p></p>
+		</div>
 	</div>
+	{% endif %}
 
 	<div id="technical">
 		<h3>Technical details</h3>
@@ -215,111 +235,92 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	/*var resel = $("#deployBtn #result");
-	$("#deployBtn").click(function() {
-		var cid;
-		resel.text("waiting for server..");
-		$.post(document.URL + '/deploy',{
-			},function(data){
-					console.log(data);
-					resel.text('.. ' + data.distro + ' has been orderd to be deployed. ');
-					cid = data.cid;
-			});
-		
-	});*/
-	/* now wait for the result 
-	$("#deployBtn").click(function() {
-		function checkData2() {
-			if(xhr2.readyState == 4)  {
-				$("#deployBtn #result").text('done.');
-				console.log('twicen');
-			    console.log(xhr2.responseText);
-			}
-		}
-		function checkData() {
-			if(xhr.readyState == 4)  {
-				$("#deployBtn #result").text('ordered.. ');
-			    console.log(xhr.responseText);
-				xhr2 = new XMLHttpRequest();
-				xhr2.open("POST", document.URL + '/isDeployed', true);
-				xhr2.onreadystatechange = checkData2;
-				xhr2.send(null);
-			}
-		}
-
-		xhr = new XMLHttpRequest();
-		xhr.open("POST", document.URL + '/deploy', true);
-		xhr.onreadystatechange = checkData;
-		xhr.send(null);
-	}); */
-
 	function waitForMsg(){
-        /* This requests the url "msgsrv.php"
-        When it complete (or errors)*/
         $.ajax({
             type: "POST",
-            url: document.URL + "/isDeployed",
-
-            async: true, /* If set to non-async, browser shows page as "Loading.."*/
+            url: window.location.origin + window.location.pathname + "/isDeployed",
+            async: true,
             cache: false,
-            timeout:50000, /* Timeout in ms */
-
-            success: function(data){ /* called when request to barge.php completes */
-				console.log("loading");
-				//console.log(data);
-				if(data.response != 0){
-                	setTimeout(
-                	    waitForMsg, /* Request next message */
-                	    5000 /* ..after 1 seconds */
-                	);
+            timeout: 50000,
+            success: function(data){
+				if (data.response == 1){
+					$("#deploy #result").text('deploying (' + data.message + ')');
+                	setTimeout(waitForMsg, 15000);
+				} else if (data.response == 0) {
+					$("#deployBtn").hide();
+					$("#deploy #result").text('');
+					$('#deploy #result').append(
+						'<table id="#deployInfo">' +
+							'<tbody>'+
+								'<tr>'+
+									'<td>Username</td>'+
+									'<td><span onclick="javascript:select_text(this);">' + data.username + '</span></td>'+
+								'</tr>'+
+								'<tr>'+
+									'<td>Password</td>'+
+									'<td><span onclick="javascript:select_text(this);">' + data.password + '</span></td>'+
+								'</tr>'+
+								'<tr>'+
+									'<td>IP address</td>'+
+									'<td><span onclick="javascript:select_text(this);">' + data.ip + '</span></td>'+
+								'</tr>'+
+								'<tr>'+
+									'<td>VNC host:port</td>'+
+									'<td><span onclick="javascript:select_text(this);">' + data.vnc_host + ':' + data.vnc_port + '</span></td>'+
+								'</tr>'+
+								'<tr>'+
+									'<td>VNC password</td>'+
+									'<td><span onclick="javascript:select_text(this);">' + data.vnc_password + '</span></td>'+
+								'</tr>'+
+							'</tbody>'+
+						'</table>'+
+						'<a id="vnc" data-fancybox-type="iframe" href="http://tndw-front.localhost/app_dev.php/distro/' + "{{distrodata.shortname}}" + '/vnc">Connect to VNC</a>'
+					);
 				} else {
-					$("#deploy #result").text('done');
+					$("#deploy #result").text('fail');
 				}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
 				console.log('err');
-                setTimeout(
-                    waitForMsg(), /* Try again after.. */
-                    15000); /* milliseconds (15seconds) */
+                setTimeout(waitForMsg(), 15000);
             }
         });
     };
-
 	function sendMsg(){
 		$("#deploy #result").text('sending message');
         $.ajax({
             type: "POST",
-            url: document.URL + "/deploy",
-
-            async: true, /* If set to non-async, browser shows page as "Loading.."*/
+            url: window.location.origin + window.location.pathname + "/deploy",
+            async: true,
             cache: false,
-            timeout:50000, /* Timeout in ms */
-
-            success: function(data){ /* called when request to barge.php completes */
+            timeout: 50000,
+            success: function(data){
 				$("#deploy #result").text('message sent');
-				//console.log(data);
-				if(data.response == 0){
+				if (data.response == 0){
 					$("#deploy #result").text('waiting for deployment');
 					waitForMsg();
 				} else if (data.response == -1) {
 					$("#deploy #result").text('not logged in');
 				} else {
-					console.log(data)
+					console.log(data.response)
 					$("#deploy #result").text('failed');
 				}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-				console.log('err');
-                setTimeout(
-                    sendMsg(), /* Try again after.. */
-                    15000); /* milliseconds (15seconds) */
+				console.log(XMLHttpRequest);
+                setTimeout(sendMsg(), 15000);
             }
         });
     };
 	
+	{% if deployStatus %}
+	waitForMsg();
+	{% else %}
+	$("#deployInfo").show();
 	$("#deployBtn").click(function() {
 		sendMsg();
 	});
+	{% endif %}
 
 });
 </script>

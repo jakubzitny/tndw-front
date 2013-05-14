@@ -121,6 +121,11 @@ h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonb
 #distro #deploy { text-align: center; margin: auto; width: 600px; }
 #distro #deploy a { font-family: zektonrg; padding: 5px 10px 5px 10px; background-color: rgb(230, 157, 29); color: #fff; text-decoration: none; }
 #distro #deploy a:hover { background-color: rgb(88, 89, 91); cursor: pointer; }
+#distro #deploy table {border-collapse:collapse; text-align: center; margin: auto; font-family: myriadpro; font-size: 13px; }
+#distro #deploy table tr { }
+#distro #deploy table td { width: 200px; height: 30px; border: 1px solid rgba(230, 157, 29, 0.5); }
+#distro #deploy table td:hover { background-color: rgba(230, 157, 29, 0.2); cursor: pointer; }
+#distro #deploy table td:first-child { background-color: rgba(230, 157, 29, 0.2); }
 
 #distro #status { text-align: center; margin: 0px 0 0px 0; color: #ccc; font-family: zektonrg; font-size: 13px; }
 
@@ -147,9 +152,11 @@ h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonb
 #distro #cols #left #distro-updates { font-family: myriadpro; font-size: 13px; color: #555; margin: 0 50px 0 0px; text-align:justify; text-justify:inter-word;  }
 
 #distro #cols #right { width: 19%; height: 500px; overflow: auto; float: left; border-left: 1px solid #ccc }
-#distro #cols #right h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(88, 89, 91); }
-#distro #cols #right #reviews { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 10px;  }
-#distro #cols #right #websites { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 10px;  }
+#distro #cols #right a { text-decoration: none; color: rgb(88, 89, 91); }
+#distro #cols #right a:hover { color: rgb(230, 157, 29 ); }
+#distro #cols #right h2 { text-align: left; font-family: zektonbo; font-size: 14px; padding: 10px 0 10px 10px; color: rgb(230, 157, 29); }
+#distro #cols #right #reviews { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0px 10px;  }
+#distro #cols #right #websites { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0px 10px;  }
 
 #distro #software { margin: auto; text-align: center; width: 600px; font-family: myriadpro; font-size: 14px; }
 #distro #software p { margin: 0; }
