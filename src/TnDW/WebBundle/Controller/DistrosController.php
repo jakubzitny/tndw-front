@@ -32,6 +32,9 @@ class DistrosController extends Controller {
 	  	$result = pg_query($ph, "select * from backing_distribution where shortname ilike '" . $distro . "'");
 		#todo check for found
     	$distrodata = pg_fetch_object($result);
+		if (!$distrodata) {
+			throw $this->createNotFoundException('This distribution does not exist.');
+		}
 		# os_type
 		$distrodata->os_type = pg_fetch_object(pg_query($ph, "select * from backing_ostype where id = " . $distrodata->os_type_id))->name;
 
