@@ -2,9 +2,35 @@
 
 {% block body %}
 
-<form action="{{ path('tndw_web_register') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <input type="submit" />
-</form>
+<div id="login">
+	<h2>Registration</h2>
 
+	<form action="{{ path('tndw_web_register') }}" method="post" {{ form_enctype(form) }}>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#form_username").focus();
+			});
+		</script>
+		<table>
+			<tbody>
+				<tr>
+					<td>{{ form_label(form.username) }}</td>
+					<td>{{ form_widget(form.username) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.email) }}</td>
+					<td>{{ form_widget(form.email) }}</td>
+				</tr>
+				<tr>
+					<td>{{ form_label(form.password) }}</td>
+					<td>{{ form_widget(form.password) }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="text">Registration blocked in testing environment.
+		<br />Login with user2@user.com and password 'user'.</p>
+	    <button type="submit" disabled>register</button>
+	</form>
+
+</div>
 {% endblock %}
