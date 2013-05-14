@@ -274,7 +274,7 @@ $(document).ready(function() {
 								'</tr>'+
 							'</tbody>'+
 						'</table>'+
-						'<a id="vnc" data-fancybox-type="iframe" href="http://tndw-front.localhost/app_dev.php/distro/' + "{{distrodata.shortname}}" + '/vnc">Connect to VNC</a>'
+						'<a id="vnc" data-fancybox-type="iframe" href="' + window.location.origin + window.location.pathname + '/vnc">Connect to VNC</a>'
 					);
 				} else {
 					$("#deploy #result").text('fail');

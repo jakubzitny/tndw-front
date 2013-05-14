@@ -50,13 +50,23 @@ body { margin: 0 0px 0 0px; padding: 0; height: 100%; }
 
 /* GENERAL */
 h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonbo; font-size: 24px; color: rgb(230, 157, 29); }
+h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 .pagetitle h5 { text-align: center; font-family: zektonbo; font-size: 14px; color: #ccc; margin-top: -15px; }
 .text {font-family: myriadpro; font-size: 12px; }
 
+/* LOGIN */
+#login { height: 100%; overflow:hidden; margin: 0px auto 0px auto; text-align: center; }
+#login table { width: 50%; margin: auto; border-collapse:collapse; font-family: myriadpro; font-size: 13px; text-align: center; }
+#login table tr { }
+#login table td { width: 200px; height: 30px; border: 1px solid rgba(230, 157, 29, 0.5); }
+#login table td:first-child { background-color: rgba(230, 157, 29, 0.2); }
+#login table input { width: 99%; height: 101%; border: 0px solid rgb(230, 157, 29); background-color: #fff; text-align: center; overflow: hidden }
+#login button { width: 150px; margin: 20px 0 0 0; }
+
 /* HOME */
 #home { margin: 0px 50px 10px 50px; padding: 50px 0 0 0; }
-#home-top { width: 20%; float: left; height: 100%; }
-#home-top-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
+#home-top { text-align: left; width: 20%; float: left; height: 100%; }
+#home-top h3 { margin: 0; padding: 0px 0 0px 0; text-align: left; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 #home-top-body { font-family: myriadpro; font-size: 13px; color: #555;  }
 #home-top-body ol li { font-family: myriadpro; font-size: 12px; }
 #home-top-body ol li a:link, #home-top-body ol li a:visited { font-family: myriadpro; 
@@ -73,6 +83,7 @@ h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonb
 #home-updates-body { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 20px 0 10px; text-align:justify; text-justify:inter-word;  }
 
 #home-stream { float: left; width: 20%; height: 100%; }
+#home-stream h3 { margin: 0; padding: 0px 0 0px 0; text-align: left; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 #home-stream-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 10px; color: rgb(230, 157, 29); }
 #home-stream-body { font-family: myriadpro; font-size: 13px; color: #555; padding: 0 0 0 20px; }
 
@@ -80,7 +91,7 @@ h2 { margin: 0; padding: 40px 0 20px 0; text-align: center; font-family: zektonb
 .perex a:hover { text-decoration: none; color: rgb(230, 157, 29); }
 
 /* DISTROS */
-#distros { height: 100%; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
+#distros { width: 80%; margin: auto;font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 #distros ul { list-style: none; list-style-type: none; }
 #distros ul li { display: inline; padding: 0 10px 0 10px; cursor: pointer }
 #distros ul li:hover { color: rgb(88, 89, 91); -webkit-transition: all 0.3s; }
