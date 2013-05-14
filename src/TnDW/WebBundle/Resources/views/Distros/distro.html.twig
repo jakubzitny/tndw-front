@@ -55,6 +55,7 @@
 		</ul>
 	</div>
 
+	{% if deployable %}
 	{% if deployStatus %}
 	<div id="deploy">
 		<script type="text/javascript">
@@ -84,6 +85,7 @@
 			<p></p>
 		</div>
 	</div>
+	{% endif %}
 	{% endif %}
 
 	<div id="technical">

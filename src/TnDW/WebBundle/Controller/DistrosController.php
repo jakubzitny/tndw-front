@@ -108,6 +108,16 @@ class DistrosController extends Controller {
 		while ($category = pg_fetch_object($result)){
 			$distrodata->categories[] = $category;
 		}
+
+		# deployable
+		$result = pg_query($ph, "select * from listener_deployplatforms " .
+								"where shortname = '" . $distrodata->shortname . "'");
+		$deployable = pg_fetch_object($result);
+		if ($deployable) {
+			$deployable = True;
+		} else {
+			$deployable = False;
+		}
 		pg_close($ph);
 
 		# countryurl
@@ -150,6 +160,7 @@ class DistrosController extends Controller {
             'news' => $topnews,
             'updates' => $topupdates,
 			'deployStatus' => $deployStatus,
+			'deployable' => $deployable,
         ));
     }
 
