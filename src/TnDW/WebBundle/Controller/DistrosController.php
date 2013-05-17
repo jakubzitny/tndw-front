@@ -30,7 +30,7 @@ class DistrosController extends Controller {
 		$parameters = $this->container->parameters;
 		$ph = pg_Connect("dbname=".$parameters['database_name_trol']." user=".$parameters['database_user_trol']." password=".$parameters['database_password_trol']);
 	  	$result = pg_query($ph, "select * from backing_distribution where shortname ilike '" . $distro . "'");
-		#todo check for found
+		#check for found
     	$distrodata = pg_fetch_object($result);
 		if (!$distrodata) {
 			throw $this->createNotFoundException('This distribution does not exist.');
@@ -73,13 +73,16 @@ class DistrosController extends Controller {
 		}
 
 		# screenshots
-	  	$result = pg_query($ph, "select * from screenshots_fetch_sdscreenshot " .
-								"where distro_id = " . $distrodata->sdscreenshot_id);
-		$distrodata->screenshots = array();
-		while ($shot = pg_fetch_object($result)){
-			$distrodata->screenshots[] = $shot;
+		unset($distrodata->screenshots);
+		if($distrodata->sdscreenshot_id != 1 or $distrodata->shortname == "absolutelinux") {
+			$result = pg_query($ph, "select * from screenshots_fetch_sdscreenshot " .
+									"where distro_id = " . $distrodata->sdscreenshot_id);
+			$distrodata->screenshots = array();
+			while ($shot = pg_fetch_object($result)){
+				$distrodata->screenshots[] = $shot;
+			}
+			$distrodata->screenshot_default = $distrodata->screenshots[intval(count($distrodata->screenshots)/2)];
 		}
-		$distrodata->screenshot_default = $distrodata->screenshots[intval(count($distrodata->screenshots)/2)];
 
 
 		# architectures
