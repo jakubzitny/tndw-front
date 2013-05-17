@@ -201,7 +201,7 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 
 /* ABOUT */
 #about { width: 800px; margin: auto; }
-#about p { text-align: justify; text-justify: inter-word; }
+#about p { text-align: center; }
 #about-contact { text-align: center; }
 #about-contact p { text-align: center; }
 #about-contact textarea { height: 50px;  }
