@@ -13,7 +13,8 @@ body { margin: 0 0px 0 0px; padding: 0; height: 100%; }
 #header-top p { position: absolute; top: 20px; left: 40px; }
 
 #header h3 { text-align: center; font-size: 12px; width: 20px; height: 20px; margin: 15px 0 0 12px; line-height: 14px; position: absolute; text-transform: lowercase; color: #fff; }
-#header #circle { -webkit-border-radius: 50%; width: 50px; height: 50px; margin: 7px 0 0 0px; position: absolute; text-transform: none; background-color: red;  }
+#header #circle { width: 50px; height: 50px; margin: 7px 0 0 0px; position: absolute; text-transform: none; background-color: red; 
+	border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%;  }
 
 #header-title { position: relative; float: left; height: 50px }
 #header-title h1 { font-size: 25px ; padding-left: 55px; font-weight: 100; text-transform: none; color: rgb(88, 89, 91) }
@@ -25,18 +26,19 @@ body { margin: 0 0px 0 0px; padding: 0; height: 100%; }
 #header-login ul li a  { }
 #header-login ul li a { text-decoration: none; color: rgb(230, 157, 29) }
 #header-login ul li:hover a { color: rgb(88, 89, 91); 
-                              -webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s }
+	-webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s; }
 
-#header-menu { background: rgb(88, 89, 91); padding-top: 15px; margin-top: 5px; }
+#header-menu { background: rgb(88, 89, 91); padding-top: 15px; margin-top: 9px; }
 #header-menu ul { list-style: none; list-style-type: none; margin: 0; padding: 0 0 5px 40px; }
 #header-menu ul li { display: inline; text-transform: uppercase; padding: 0 5px 0 5px; }
 #header-menu ul li:first-child { padding: 0 5px 0 0; }
 #header-menu ul li a { text-decoration: none; /* selecting link carefuly */ }
 #header-menu ul li:hover a { color: rgb(230, 157, 29); 
-                             -webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s }
+	-webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s }
 
 #header-menu #search { cursor: pointer; float: right; margin: -22px 30px 0px 0; color: #fff }
-#header-menu #search:hover { cursor: pointer; float: right; margin: -22px 30px 0px 0; color: rgb(230, 157, 29); -webkit-transition: color 0.3s }
+#header-menu #search:hover { cursor: pointer; float: right; margin: -22px 30px 0px 0; color: rgb(230, 157, 29);
+	-webkit-transition: color 0.3s; -moz-transition: color 0.3s; -o-transition: color 0.3s; transition: color 0.3s; }
  
 .unselected { color: #fff; }
 .selected a { color: rgb(230, 157, 29); }
@@ -73,10 +75,8 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 #home-top h3 { margin: 0; padding: 0px 0 0px 0; text-align: left; font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 #home-top-body { font-family: myriadpro; font-size: 13px; color: #555;  }
 #home-top-body ol li { font-family: myriadpro; font-size: 12px; }
-#home-top-body ol li a:link, #home-top-body ol li a:visited { font-family: myriadpro; 
-       font-size: 12px; text-decoration: none; color: rgb(88, 89, 91)}
+#home-top-body ol li a:link, #home-top-body ol li a:visited { font-family: myriadpro; font-size: 12px; text-decoration: none; color: rgb(88, 89, 91)}
 #home-top-body ol li a:hover { font-family: myriadpro; font-size: 12px; text-decoration: none; color: rgb(230, 157, 29)}
-
 
 #home-news { width: 30%; float: left; height: 100%; }
 #home-news-title h2 { font-family: zektonbo; font-size: 14px; padding: 0 0 0 0; color: rgb(88, 89, 91); }
@@ -98,12 +98,11 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 #distros { width: 80%; margin: auto;font-family: zektonbo; font-size: 14px; color: rgb(230, 157, 29); }
 #distros ul { list-style: none; list-style-type: none; }
 #distros ul li { display: inline; padding: 0 10px 0 10px; cursor: pointer }
-#distros ul li:hover { color: rgb(88, 89, 91); -webkit-transition: all 0.3s; }
+#distros ul li:hover { color: rgb(88, 89, 91);
+	-webkit-transition: all 0.3s; -moz-transition: all 0.3s; -o-transition: all 0.3s; transition: all 0.3s; }
 
 #distrolist { margin: 10px 0 0 0; text-align: left; font-family: "Myriad Pro"; font-size: 12px;
-          column-count: 5; column-gap: 10px; 
-          -moz-column-count: 5; -moz-column-gap: 10px; -moz-column-width: 30px;
-          -webkit-column-count: 5; -webkit-column-gap: 10px; -webkit-column-width: 30px; }
+	column-count: 5; column-gap: 10px; -moz-column-count: 5; -moz-column-gap: 10px; -webkit-column-count: 5; -webkit-column-gap: 10px; }
 #distrolist div ol { }
 #distrolist div ol li { font-family: myriadpro; font-size: 12px; color: rgb(88, 89, 91) }
 #distrolist div ol li a:link, #distrolist div ol li a:visited { font-family: myriadpro; 
@@ -116,21 +115,27 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 
 #distro #contents { position: absolute; width: 130px; z-index: 1000; margin-left: -85px; }
 #distro #contents ul { font-family: zektonrg; font-size: 12px; color: rgb(88, 89, 91); }
-#distro #contents li { margin: 2px 0 0px 0; list-style: none; list-style-type: none; background-color: rgb(88, 89, 91); -webkit-transition: background-color 0.4s; }
+#distro #contents li { margin: 2px 0 0px 0; list-style: none; list-style-type: none; background-color: rgb(88, 89, 91);
+	-webkit-transition: background-color 0.4s; -moz-transition: background-color 0.4s; -o-transition: background-color 0.4s; transition: background-color 0.4s; }
 #distro #contents li a { padding: 6px 10px 6px 10px; text-decoration: none; color: #fff; margin: 0px; display: block; width: 100%; height: 100%; }
-#distro #contents li:hover { background-color: rgb(230, 157, 29); text-decoration: none; color: #fff; cursor: pointer; -webkit-transition: background-color 0.2s; }
+#distro #contents li:hover { background-color: rgb(230, 157, 29); text-decoration: none; color: #fff; cursor: pointer;
+	-webkit-transition: background-color 0.2s; -moz-transition: background-color 0.2s; -o-transition: background-color 0.2s; transition: background-color 0.2s; }
 
 #distro #links { text-align: center; font-family: zektonrg; color: #fff; font-size: 14px; margin-bottom: 50px; }
 #distro #links ul { margin: 0; padding: 0; }
 #distro #links ul li { display: inline; list-style: none; list-style-type: none; background-color: rgb(230, 157, 29); cursor: pointer; margin-bottom: 5px; padding: 5px 10px 5px 10px; }
-#distro #links ul li a {  -webkit-transition: all 0.4s;background-color: rgb(230, 157, 29); color: #fff; cursor: pointer; text-decoration: none; }
-#distro #links ul li:hover { -webkit-box-shadow: 0px 0px 5px #ccc; color: #ccc; -webkit-transition: all 0.2s; }
-#distro #links ul li:hover a { color: #ccc; -webkit-transition: all 0.2s; }
+#distro #links ul li a { background-color: rgb(230, 157, 29); color: #fff; cursor: pointer; text-decoration: none;
+	-webkit-transition: all 0.4s; -moz-transition: all 0.4s; -o-transition: all 0.4s; transition: all 0.4s; }
+#distro #links ul li:hover { color: #ccc;
+	-webkit-box-shadow: 0px 0px 5px #ccc; -moz-box-shadow: 0px 0px 5px #ccc; box-shadow: 0px 0px 5px #ccc; 
+	-webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s; }
+#distro #links ul li:hover a { color: #ccc;
+	-webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s; }
 
 #distro #links ul li ul { display: none; position: relative; margin: 5px 0 0 -100px; }
-#distro #links ul li:hover ul { color: #fff; display: block; -webkit-box-shadow: 0px 0 0px #fff; position: absolute; }
+#distro #links ul li:hover ul { color: #fff; display: block; position: absolute; }
 #distro #links ul li:hover ul li { position: relative; list-style: none; list-style-type: none; margin: 0px 0 0 0px; }
-#distro #links ul li:hover ul li:hover { background-color: #000; color: #fff; -webkit-box-shadow: 0px 0 0px #fff; }
+#distro #links ul li:hover ul li:hover { background-color: #000; color: #fff; }
 #distro #links ul li:hover ul li:hover a { background-color: #000 }
 
 #distro #deploy { text-align: center; margin: auto; width: 600px; }
@@ -145,7 +150,6 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 
 #distro #status { text-align: center; margin: 0px 0 0px 0; color: #ccc; font-family: zektonrg; font-size: 13px; }
 
-
 #distro #technical { text-align: left; font-family: myriadpro; margin: auto auto 50px auto; width: 700px; font-family: myriadpro; font-size: 14px; }
 #distro #technical ul { font-weight: bold; font-size: 13px; padding: 0 50px 0 50px; }
 #distro #technical hr { width: 80%; color: #ccc; background-color: #ccc; border: 0; height: 1px; float: left; }
@@ -153,8 +157,8 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 #distro #technical ul li a { text-decoration: none; color: #000; }
 #distro #technical ul li:hover { background-color: #ccc; cursor: pointer; }
 
-.green-circle { -webkit-border-radius: 50%; width: 6px; height: 6px; background-color: rgb(67, 226, 59); }
-.red-circle { -webkit-border-radius: 50%; width: 10px; height: 10px; background-color: rgb(230, 15, 15); }
+.green-circle { -moz-border-radius: 50%; border-radius: 50%; -webkit-border-radius: 50%; width: 6px; height: 6px; background-color: rgb(67, 226, 59); }
+.red-circle { -moz-border-radius: 50%; border-radius: 50%; -webkit-border-radius: 50%; width: 10px; height: 10px; background-color: rgb(230, 15, 15); }
 
 #distro #screenshots { text-align: center; margin: 0 0 50px 0; }
 #distro #screenshots a { cursor: default }
