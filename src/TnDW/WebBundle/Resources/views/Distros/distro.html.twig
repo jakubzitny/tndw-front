@@ -5,8 +5,7 @@
 
 {% block body %}
 <div id="distro">
-	<div class="pagetitle">
-		<a name="desc-link"></a>
+	<div id="desc-link" class="pagetitle">
 		<h2>{{distrodata.name}}</h2>
 		<h5>{{distrodata.os_type|lower}}</h5>
 	</div>
@@ -104,7 +103,8 @@
 
 		<!-- desktops -->
 		{% if distrodata.desktops is defined and distrodata.desktops | length > 0 %}
-		<ul>{{distrodata.name}} comes with<br />
+		<h4>{{distrodata.name}} comes with</h4>
+		<ul>
 		{% for desktop in distrodata.desktops %}
 			<li>{{desktop.name | lower}}</li>
 		{% endfor %}
@@ -112,9 +112,10 @@
 		{% endif %}
 
 		<!-- architectures -->
-		<hr><br />
 		{% if distrodata.architectures is defined and distrodata.architectures | length > 0 %}
-		<ul>{{distrodata.name}} runs on<br />
+		<hr><br />
+		<h4>{{distrodata.name}} runs on</h4>
+		<ul>
 		{% for architecture in distrodata.architectures %}
 			<li>{{architecture.name}}</li>
 		{% endfor %}
@@ -122,9 +123,10 @@
 		{% endif %}
 
 		<!-- categories -->
-		<hr><br />
 		{% if distrodata.categories is defined and distrodata.categories | length > 0 %}
-		<ul>{{distrodata.name}} is suitable for<br />
+		<hr><br />
+		<h4>{{distrodata.name}} is suitable for</h4>
+		<ul>
 		{% for category in distrodata.categories %}
 			<li>{{category.name | lower }}</li>
 		{% endfor %}
@@ -134,7 +136,8 @@
 		<!-- basedons -->
 		{% if distrodata.basedons is defined and distrodata.basedons | length > 0 %}
 		<hr><br />
-		<ul>{{distrodata.name}} is based on<br />
+		<h4>{{distrodata.name}} is is based on</h4>
+		<ul>
 		{% for basedon in distrodata.basedons %}
 			<li><a href="{{ path('tndw_web_distro', { 'distro': basedon.shortname}) }}">{{basedon.name}}</a></li>
 		{% endfor %}
@@ -144,7 +147,8 @@
 		<!-- inspireds -->
 		{% if distrodata.inspireds is defined and distrodata.inspireds | length > 0 %}
 		<hr><br />
-		<ul>{{distrodata.name}} inspired<br />
+		<h4>{{distrodata.name}} inspired</h4>
+		<ul>
 		{% for inspired in distrodata.inspireds %}
 			<li><a href="{{ path('tndw_web_distro', { 'distro': inspired.shortname}) }}">{{inspired.name}}</a></li>
 		{% endfor %}
@@ -177,9 +181,9 @@
 				});
    			});
 		</script>
-		<a class="screenshot" rel="group" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800px" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
+		<a class="screenshot" alt="screenshot" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
 		{% for shot in distrodata.screenshots %}
-		<a class="screenshot" rel="group" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
+		<a class="screenshot" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
 		{% endfor %}
 		<!--
 		<div id="more">
@@ -207,7 +211,7 @@
 			<div id="reviews">
 				{% if distrodata.links['reviews'] is defined %}
 		        {% for link in distrodata.links['reviews'] %}
-					<a href={{link.href}}>{{link.name}}</a><br/>
+					<a href="{{link.href}}">{{link.name}}</a><br/>
 		        {% endfor %}
 				{% endif %}
 		    </div>
@@ -215,7 +219,7 @@
 			<div id="websites">
 				{% if distrodata.links['related_websites'] is defined %}
 		        {% for link in distrodata.links['related_websites'] %}
-					<a href={{link.href}}>{{link.name}}</a><br/>
+					<a href="{{link.href}}">{{link.name}}</a><br/>
 		        {% endfor %}
 				{% endif %}
 		    </div>

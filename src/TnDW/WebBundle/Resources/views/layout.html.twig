@@ -2,6 +2,7 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml"
       xmlns:og="http://opengraphprotocol.org/schema/">
     <head>
+		<meta charset='utf-8'>
         <title>{% block title %}TNDW{% endblock %}</title>
         <link href="{{ asset('bundles/tndwweb/css/main.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('bundles/tndwweb/css/jquery.fancybox.css') }}" rel="stylesheet" type="text/css" />
@@ -44,23 +45,24 @@
                         <li class="news"><a href="{{ path('tndw_web_news') }}">News</a></li>
                         <li class="about"><a href="{{ path('tndw_web_about') }}">About</a></li>
                     </ul>
-                    <ul id="search">
-						<script type="text/javascript">
-							$(document).ready(function() {
-								$("#header-search").hide();
-								$('#header-search input').focusout(function() {
-									$("#header-search").slideUp(300);
-								});
-								$(".search").click(function() {
-									if ($("#header-search").css("display") == 'none') {
-										$("#header-search").slideDown(300);
-										$('#header-search input').focus();
-									} else {
-										$("#header-search").slideUp(300);
-									}
-								});
+					<!-- search -->
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$("#header-search").hide();
+							$('#header-search input').focusout(function() {
+								$("#header-search").slideUp(300);
 							});
-						</script>
+							$(".search").click(function() {
+								if ($("#header-search").css("display") == 'none') {
+									$("#header-search").slideDown(300);
+									$('#header-search input').focus();
+								} else {
+									$("#header-search").slideUp(300);
+								}
+							});
+						});
+					</script>
+                    <ul id="searchul">
                         <li class="search">Search</li>
                     </ul>
                 </div>
