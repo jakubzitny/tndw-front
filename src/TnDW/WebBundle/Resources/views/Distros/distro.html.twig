@@ -18,8 +18,8 @@
 		});
 	</script>
 	<div id="contents">
+		<span id="jumpto">Jump to</span>
 		<ul>
-			Jump to
 			<li><a href="#desc-link">Description</a></li>
 			{% if deployable %}
 			<li><a href="#deploy">Deploy</a></li>
@@ -181,7 +181,7 @@
 				});
    			});
 		</script>
-		<a class="screenshot" alt="screenshot" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
+		<a class="screenshot" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800" alt="screenshot" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
 		{% for shot in distrodata.screenshots %}
 		<a class="screenshot" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
 		{% endfor %}
