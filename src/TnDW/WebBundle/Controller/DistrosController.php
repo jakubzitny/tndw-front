@@ -10,7 +10,7 @@ use Predis;
 class DistrosController extends Controller {
 
     public function indexAction() {
-		$ph = pg_Connect("dbname=troller6 user=postgres password=root");
+		$ph = pg_Connect("dbname=".$parameters['database_name_trol']." user=".$parameters['database_user_trol']." password=".$parameters['database_password_trol']);
 	  	$result = pg_query($ph, "select * from backing_distribution");
 		$distros = array();	
 		while($distro = pg_fetch_object($result))
