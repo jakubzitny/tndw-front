@@ -27,7 +27,8 @@
 			<li><a href="#technical">Technical</a></li>
 			<li><a href="#screenshots">Screenshots</a></li>
 			<li><a href="#distro-updates">Updates</a></li>
-			<li><a href="#software">Software</a></li>
+			<!--<li><a href="#software">Software</a></li>-->
+            <li><a href="#country">Origin</a></li>
 		</ul>
 	</div>
 
@@ -234,14 +235,14 @@
 	</div>
 	-->
 
-	<!--
 	<h3>Origin</h3>
 	<div id="country">
-		<p><span class="keyword">{{distrodata.name}}</span> is a <a href="#">{{distrodata.os_type}}</a> operating system coming from <a href="#">{{distrodata.origin}}</a>.</p>
-		<div id="bg" style="background: url({{countryurl}}) no-repeat"></div>
+		<p><span class="keyword">{{distrodata.name}}</span> comes from <b>{{distrodata.origin}}</b>.</p>
+		{% for countryurl in countryurls %}
+            <img src="{{countryurl}}" />
+        {% endfor %}
 		</div>
 	</div>
-	-->
 
 </div>
 

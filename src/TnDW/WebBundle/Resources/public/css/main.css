@@ -183,7 +183,7 @@ h3 { margin: 0; padding: 0px 0 0px 0; text-align: center; font-family: zektonbo;
 #distro #software { margin: auto; text-align: center; width: 600px; font-family: myriadpro; font-size: 14px; }
 #distro #software p { margin: 0; }
 
-#distro #country { margin: 200px 0 300px 0; font-family: zektonrg; }
+#distro #country { text-align: center; font-family: myriadpro; font-size: 13px; }
 #distro #country p { z-index: 20; }
 #distro #country #bg { width: 500px; height: 500px; margin: -200px 0 0 500px ; position: absolute; z-index: 0; }
 
