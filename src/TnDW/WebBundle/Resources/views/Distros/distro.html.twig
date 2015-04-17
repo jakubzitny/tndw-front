@@ -182,9 +182,9 @@
 				});
    			});
 		</script>
-		<a class="screenshot" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800" alt="screenshot" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
+		<a class="screenshot" href="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://alpha.thenewdistrowatch.eu/tndw-front/web/bundles/tndwweb/directory/', '%': '%25'})}}"><img width="800" alt="screenshot" src="{{distrodata.screenshot_default.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://alpha.thenewdistrowatch.eu/tndw-front/web/bundles/tndwweb/directory/', '%': '%25'})}}" /></a>
 		{% for shot in distrodata.screenshots %}
-		<a class="screenshot" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://tndw-front.localhost/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
+		<a class="screenshot" href="{{shot.link | replace({'http://www.chrishaney.com/screenshots/scaled/': 'http://alpha.thenewdistrowatch.eu/tndw-front/web/bundles/tndwweb/directory/', '%': '%25'})}}"></a>
 		{% endfor %}
 		<!--
 		<div id="more">
@@ -253,7 +253,7 @@ $(document).ready(function() {
 	function waitForMsg(){
         $.ajax({
             type: "POST",
-            url: window.location.origin + window.location.pathname + "/isDeployed",
+            url: window.location.pathname + "/isDeployed",
             async: true,
             cache: false,
             timeout: 50000,
@@ -289,7 +289,7 @@ $(document).ready(function() {
 								'</tr>'+
 							'</tbody>'+
 						'</table>'+
-						'<a id="vnc" data-fancybox-type="iframe" href="' + window.location.origin + window.location.pathname + '/vnc">Connect to VNC</a>'
+						'<a id="vnc" data-fancybox-type="iframe" href="' + window.location.pathname + '/vnc">Connect to VNC</a>'
 					);
 				} else {
 					$("#deploy #result").text('fail');
@@ -305,7 +305,7 @@ $(document).ready(function() {
 		$("#deploy #result").text('sending message');
         $.ajax({
             type: "POST",
-            url: window.location.origin + window.location.pathname + "/deploy",
+            url: window.location.pathname + "/deploy",
             async: true,
             cache: false,
             timeout: 50000,
